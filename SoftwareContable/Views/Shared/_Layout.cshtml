@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<meta http-equiv="X-UA-Compatible" content="IE=11" />
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Software Contable</title>
+
+    @Styles.Render(
+        "~/Content/bootstrap.min.css",
+        "~/Content/bootstrap-theme.min.css",
+        "~/css/font-awesome.min.css",
+        "~/Content/style.css",
+        "~/Content/dark-blue.css",
+        "~/Content/appInventory.css")
+
+    @RenderSection("Styles", false)
+
+    @* loadingPanel set to active just when page is loaded *@
+    <style>
+        #loadingPanel {
+            display: table;
+        }
+    </style>
+</head>
+<body ng-app="appInventory" date-format="@ViewBag.DateFormat">
+
+    <div class="wrapper">
+        <div class="header">
+            <div class="topbar">
+                <div class="container">
+                    <ul class="loginbar pull-right">
+                        <li>
+                            <i class="fa fa-user fa-1x"></i>
+                            <a>User Name</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="fa fa-bars"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse navbar-responsive-collapse">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "set-loading-panel" })
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    Catalogs
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        @Html.ActionLink("Applications", "Index", "Application", null, new { @class = "set-loading-panel" })
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Lobs", "Index", "Lob", null, new { @class = "set-loading-panel" })
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Contacts", "Index", "Contact", null, new { @class = "set-loading-panel" })
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Locations", "Index", "Location", null, new { @class = "set-loading-panel" })
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Hardware", "Index", "Hardware", null, new { @class = "set-loading-panel" })
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loadingPanel">
+            <div>
+                Page Loading...<br />
+                <i class="fa fa-5x fa-circle-o-notch fa-spin"></i>
+            </div>
+        </div>
+
+        <div class="alert-messages-section">
+            <div class="row">
+                <div id="errorPanel" class="col-md-offset-4 col-md-4 text-justify alert alert-danger alert-dismissible fade in hidden" role="alert">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="text-center">Error!</h4>
+                    <span class="message"></span>
+                </div>
+
+                <div id="warningPanel" class="col-md-offset-4 col-md-4 text-justify alert alert-warning alert-dismissible fade in hidden" role="alert">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="text-center">Warning!</h4>
+                    <span class="message"></span>
+                </div>
+
+                <div id="successPanel" class="col-md-offset-4 col-md-4 text-justify alert alert-success alert-dismissible fade in hidden" role="alert">
+                    <button type="button" class="close">×</button>
+                    <h4 class="text-center">Success!</h4>
+                    <span class="message"></span>
+                </div>
+            </div>
+        </div>
+
+        @RenderBody()
+
+        <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>
+                            @ViewBag.Year &copy;DPR Construction. ALL Rights Reserved.
+                            <a target="_blank" href="htpp://www.dpr.com">DPR</a> |
+                            <a href="#">Privacy Policy</a> |
+                            <a href="#">Terms of Service</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render(
+        "~/Scripts/jquery-2.2.0.min.js",
+        "~/Scripts/bootstrap.min.js")
+
+    @RenderSection("Scripts", false)
+</body>
+</html>
