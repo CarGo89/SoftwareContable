@@ -16,7 +16,7 @@
         "~/css/font-awesome.min.css",
         "~/Content/style.css",
         "~/Content/dark-blue.css",
-        "~/Content/appInventory.css")
+        "~/Content/software-contable.css")
 
     @RenderSection("Styles", false)
 
@@ -53,27 +53,25 @@
                     <div class="collapse navbar-collapse navbar-responsive-collapse">
                         <ul class="nav navbar-nav">
                             <li>
-                                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "set-loading-panel" })
+                                @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "set-loading-panel" })
                             </li>
+                            <li>
+                                @Html.ActionLink("Clientes", "Index", "Client", null, new { @class = "set-loading-panel" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("Usuarios", "Index", "User", null, new { @class = "set-loading-panel" })
+                            </li>
+
                             <li class="dropdown">
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    Catalogs
+                                    Reportes
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        @Html.ActionLink("Applications", "Index", "Application", null, new { @class = "set-loading-panel" })
+                                        @Html.ActionLink("Crear", "Create", "Report", null, new { @class = "set-loading-panel" })
                                     </li>
                                     <li>
-                                        @Html.ActionLink("Lobs", "Index", "Lob", null, new { @class = "set-loading-panel" })
-                                    </li>
-                                    <li>
-                                        @Html.ActionLink("Contacts", "Index", "Contact", null, new { @class = "set-loading-panel" })
-                                    </li>
-                                    <li>
-                                        @Html.ActionLink("Locations", "Index", "Location", null, new { @class = "set-loading-panel" })
-                                    </li>
-                                    <li>
-                                        @Html.ActionLink("Hardware", "Index", "Hardware", null, new { @class = "set-loading-panel" })
+                                        @Html.ActionLink("Ver", "Visualize", "Report", null, new { @class = "set-loading-panel" })
                                     </li>
                                 </ul>
                             </li>
@@ -122,12 +120,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p>
-                            @ViewBag.Year &copy;DPR Construction. ALL Rights Reserved.
-                            <a target="_blank" href="htpp://www.dpr.com">DPR</a> |
-                            <a href="#">Privacy Policy</a> |
-                            <a href="#">Terms of Service</a>
-                        </p>
+                        <p>&nbsp;</p>
                     </div>
                 </div>
             </div>
