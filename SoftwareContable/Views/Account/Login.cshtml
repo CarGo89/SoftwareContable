@@ -15,22 +15,22 @@
 </head>
 <body>
     <div class="container">
-        <div class="col-md-offset-4 col-md-6 col-md-4 ">
-            <h1 class="text-center login-title">Software Contable</h1>
-
+        <div class="col-md-offset-4 col-md-6 col-md-4">
             <div class="account-wall text-center">
+                <h2>Software Contable</h2>
+
                 <i class="fa fa-user fa-6x profile-img text-primary"></i>
 
                 <form class="form-signin">
-                    <input type="text" class="form-control" placeholder="Usuario" autofocus="autofocus" />
+                    <input type="text" class="form-control" placeholder="Usuario" />
                     <input type="password" class="form-control" placeholder="Contraseña" />
 
-                    <button class="btn btn-primary btn-lg btn-block">
+                    <a href='@Url.Action("Index", "Home")' class="btn btn-primary btn-lg btn-block">
                         Iniciar Sesi&oacute;n
-                    </button>
+                    </a>
                 </form>
             </div>
-            <a href="@Url.Action("Register", "Account")" class="text-center new-account">Registrarse</a>
+            <a href='@Url.Action("Register", "Account")' class="text-center new-account">Registrarse</a>
         </div>
     </div>
 </body>

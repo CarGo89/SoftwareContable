@@ -1038,6 +1038,7 @@
     <Content Include="Views\Report\Visualize.cshtml" />
     <Content Include="Views\Client\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

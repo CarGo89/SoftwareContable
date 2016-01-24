@@ -191,3 +191,17 @@ input[type=checkbox] {
 .fa-6x {
   font-size: 6em;
 }
+
+.loginbar a {
+    text-transform: none !important;
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.fa {
+    margin-right: 2px;
+}
+
+a.log-off {
+    cursor: pointer;
+}

@@ -1,0 +1,60 @@
+﻿@{
+ ViewBag.Title = "Registrar Nuevo Usuario";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/software-contable.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-offset-1 col-md-10">
+            <div class="account-wall text-center">
+                <h2>Registrar Nuevo Usuario</h2>
+
+                <form class="form-horizontal voffset5">
+                    <div class="form-group">
+                        <label for="txtUser" class="col-md-5 control-label">Usuario</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control" id="txtUser" placeholder="Usuario" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtEmail" class="col-md-5 control-label">Email</label>
+                        <div class="col-md-3">
+                            <input type="email" class="form-control" id="txtEmail" placeholder="Email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtPassword" class="col-md-5 control-label">Contraseña</label>
+                        <div class="col-md-3">
+                            <input type="password" class="form-control" id="txtPassword" placeholder="Contraseña" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtConfirmPassword" class="col-md-5 control-label">Confirmar Contraseña</label>
+                        <div class="col-md-3">
+                            <input type="password" class="form-control" id="txtConfirmPassword" placeholder="Confirmar Contraseña" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-5 col-md-1">
+                            <a href='@Url.Action("Login", "Account")' class="btn btn-link">Cancelar</a>
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary btn-lg btn-block" title="Registrar Nuevo Usuario">Registrar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

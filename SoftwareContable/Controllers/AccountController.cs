@@ -13,7 +13,12 @@ namespace SoftwareContable.Controllers
             return View();
         }
 
-        [HttpPost]
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
