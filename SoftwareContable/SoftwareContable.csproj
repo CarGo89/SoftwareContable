@@ -1015,10 +1015,14 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DataAccess\Entities\User.cs" />
     <Compile Include="DataAccess\SoftwareContableDbContext.cs" />
+    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Account\UserLogin.cs" />
+    <Compile Include="Models\Account\UserRegister.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\System.cs" />
@@ -1058,6 +1062,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DataAccess\Repositories\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
