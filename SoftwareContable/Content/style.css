@@ -1166,7 +1166,7 @@
 }
 
 .copyright p {
-	color: #dadada;
+	color: #fff;
 	margin-top: 12px;
 }
 
@@ -1192,7 +1192,7 @@
 	background: url(../img/breadcrumbs.png) repeat;
 }
 .breadcrumbs h1 {
-	color: #666;
+	color: white;
 	font-size: 22px;
 	margin-top: 8px;
 }
@@ -1204,11 +1204,11 @@
 	position: relative;
 }
 .breadcrumb a {
-	color: #777;
+	color: white;
 }
 .breadcrumb li.active,
 .breadcrumb li a:hover {
-	color: #72c02c;
+	color: white;
 	text-decoration: none;
 }
 
@@ -2408,11 +2408,11 @@ ul.labels-demo li {
 
 .breadcrumb-v2 li a,
 .breadcrumb-v2 li.active {
-	color: #fff;
+	color: white;
 }
 
 .breadcrumb-v2 li i {
-	color: #fff;
+	color: white;
 	min-width: 19px;
 	padding: 3px 7px;
 	margin-right: 5px;
@@ -2428,7 +2428,7 @@ ul.labels-demo li {
 }
 
 .breadcrumbs-v3 h1 {
-	color: #fff;
+	color: white;
 	margin: 3px 0;
 	font-size: 22px;
 	font-weight: 200;
@@ -2441,7 +2441,7 @@ ul.labels-demo li {
 }
 
 .breadcrumbs-v3 .breadcrumb li a {
-	color: #fff;
+	color: white;
 }
 
 /*Title-Box-V2*/

@@ -4,12 +4,12 @@ namespace SoftwareContable.Controllers
 {
     public class ReportController : Controller
     {
-        public ActionResult Create()
+        public ActionResult Visualize()
         {
             return View();
         }
 
-        public ActionResult Visualize()
+        public ActionResult Create()
         {
             return View();
         }

@@ -1,18 +1,119 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "title";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div ng-controller="">
-    <form class="form-horizontal">
-        <div class="breadcrumbs-v3">
-            <div class="container">
-                <h1 class="pull-left">Crear Reporte</h1>
-                <ul class="pull-right breadcrumb">
-                    <li>Reportes</l>
-                    <li>Crear</li>
-                </ul>
+    <div class="breadcrumbs-v3">
+        <div class="container">
+            <h1 class="pull-left">Reportes</h1>
+            <ul class="pull-right breadcrumb">
+                <li>Reportes</li>
+                <li>Crear</li>
+            </ul>
+        </div>
+    </div>
+
+    <form class="form-inline">
+        <div class="container search-criteria">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="form-group">
+                        <h5 class="bold">RFC Cliente</h5>
+                        <input id="txtRfcCliente" type="text" class="form-control" placeholder="RFC Cliente" />
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <h5 class="bold">Raz&oacute;n Social</h5>
+                        <input type="text" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <h5>&nbsp;</h5>
+                        <button class="btn btn-info btn-block" title="Buscar Cliente"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row voffset4">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="form-group">
+                        <h5>Fecha Factura</h5>
+                        <input id="txtFechaFactura" type="text" class="form-control" placeholder="Fecha Factura" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h5>Folio Factura</h5>
+                        <input id="txtFolioFactura" type="text" class="form-control" placeholder="Folio Factura" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="form-group">
+                        <h5>Importe Factura</h5>
+                        <input id="txtImporteFactura" type="text" class="form-control" placeholder="Importe Factura" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h5>Sistema Vendido</h5>
+                        <select class="form-control">
+                            <option value="1">Contabilidad</option>
+                            <option value="2">AdminPAQ</option>
+                            <option value="3">ContPAQ</option>
+                            <option value="4">Bancos</option>
+                            <option value="5">Facturaci&oacute;n Electr&oacute;nica</option>
+                            <option value="6">N&oacute;minas</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="form-group">
+                        <h5>Comentarios</h5>
+                        <textarea class="form-control" cols="76" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="form-group">
+                        <h5>Fecha Promesa</h5>
+                        <input id="txtFechaPromesa" type="text" class="form-control" placeholder="Fecha Promesa" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h5>Lote</h5>
+                        <input id="txtLote" type="text" class="form-control" placeholder="Lote" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-offset-2 col-md-4">
+                    <div class="form-group">
+                        <h5>No. de Usuarios</h5>
+                        <input id="txtNoUsuarios" type="text" class="form-control" placeholder="No. de Usuarios" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h5>Fecha Activaci&oacute;n</h5>
+                        <input id="txtFechaActivacion" type="text" class="form-control" placeholder="Fecha Activaci&oacute;n" />
+                    </div>
+                </div>
+            </div>
+            <div class="row voffset4">
+                <div class="col-md-offset-4 col-md-1">
+                    <a href='@Url.Action("Index", "Home")' class="btn btn-link">Regresar</a>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary btn-lg btn-block">Crear</button>
+                </div>
             </div>
         </div>
     </form>
