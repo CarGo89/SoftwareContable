@@ -166,6 +166,10 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\controllers\client-controller.js" />
+    <Content Include="Scripts\controllers\report-controller.js" />
+    <Content Include="Scripts\controllers\software-contable-directives.js" />
+    <Content Include="Scripts\controllers\user-controller.js" />
     <Content Include="Scripts\datatable\css\dataTables.bootstrap.css" />
     <Content Include="Scripts\datatable\css\jquery.dataTables.css" />
     <Content Include="Scripts\datatable\css\jquery.dataTables.min.css" />
@@ -999,7 +1003,7 @@
     <Content Include="Scripts\jquery-2.2.0.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Scripts\utilities\app-inventory.js" />
+    <Content Include="Scripts\utilities\software-contable.js" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.2.0.min.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -1015,7 +1019,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\System.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
@@ -1049,8 +1058,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
-    <Folder Include="Scripts\controllers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

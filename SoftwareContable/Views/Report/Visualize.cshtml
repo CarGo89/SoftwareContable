@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div ng-controller="">
+<div ng-controller="reportController">
     <div class="breadcrumbs-v3">
         <div class="container">
             <h1 class="pull-left">Reportes</h1>
@@ -61,5 +61,17 @@
             </div>
         </div>
     </div>
-
 </div>
+
+@section Scripts
+{
+    @Scripts.Render(
+        "~/Scripts/angular.js",
+        "~/Scripts/bootstrap-confirmation.js",
+        "~/Scripts/datatable/js/jquery.dataTables.js",
+        "~/Scripts/datatable/responsive/js/dataTables.responsive.min.js",
+        "~/Scripts/datatable/js/dataTables.bootstrap.js",
+        "~/Scripts/Utilities/software-contable.js",
+        "~/Scripts/controllers/software-contable-directives.js",
+        "~/Scripts/controllers/report-controller.js")
+}
