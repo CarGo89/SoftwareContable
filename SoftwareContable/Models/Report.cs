@@ -6,19 +6,15 @@ namespace SoftwareContable.Models
     {
         public int Id { get; set; }
 
-        public int ClientId { get; set; }
-
-        public virtual Client Client { get; set; }
+        public Client Client { get; set; }
 
         public DateTime CreationDate { get; set; }
-
-        public int InvoiceId { get; set; }
 
         public DateTime InvoiceDate { get; set; }
 
         public decimal InvoiceTotal { get; set; }
 
-        public System SoldSystem { get; set; }
+        public SoldSystem SoldSystem { get; set; }
 
         public string Comments { get; set; }
 

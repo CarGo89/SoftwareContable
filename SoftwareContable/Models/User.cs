@@ -1,5 +1,4 @@
-﻿
-namespace SoftwareContable.Models
+﻿namespace SoftwareContable.Models
 {
     public class User
     {
@@ -9,6 +8,6 @@ namespace SoftwareContable.Models
 
         public string Email { get; set; }
 
-        public UserRole Role { get; set; }
+        public Role Role { get; set; }
     }
 }

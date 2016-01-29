@@ -17,19 +17,19 @@
         </div>
     </div>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal" ng-init="initUrls('@Url.Action("Get", "User")')">
         <div class="container table-results-container">
             <div class="row text-center">
                 <div class="col-md-offset-5 col-md-2">
-                    <buttaon type="button" title="Crear Usuario" class="btn btn-block btn-success" data-toggle="modal" data-target="#newApplicationModal">
+                    <button type="button" title="Crear Usuario" class="btn btn-block btn-success" data-toggle="modal" data-target="#newApplicationModal">
                         <i class="fa fa-plus-square-o"></i>Crear
-                    </buttaon>
+                    </button>
                 </div>
             </div>
 
             <div class="row voffset4">
                 <div class="col-md-12">
-                    <table id="applicationResults" class="table table-striped table-bordered table-hover dt-responsive" width="100%">
+                    <table id="userResults" class="table table-striped table-bordered table-hover dt-responsive" width="100%">
                         <thead>
                             <tr>
                                 <th>Nombre</th>

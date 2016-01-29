@@ -1,7 +1,6 @@
-﻿
-namespace SoftwareContable.Models
+﻿namespace SoftwareContable.Models
 {
-    public class System
+    public class Role
     {
         public int Id { get; set; }
 

@@ -167,7 +167,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\controllers\client-controller.js" />
-    <Content Include="Scripts\controllers\report-controller.js" />
+    <Content Include="Scripts\controllers\create-report-controller.js" />
+    <Content Include="Scripts\controllers\view-report-controller.js" />
     <Content Include="Scripts\controllers\software-contable-directives.js" />
     <Content Include="Scripts\controllers\user-controller.js" />
     <Content Include="Scripts\datatable\css\dataTables.bootstrap.css" />
@@ -1015,20 +1016,26 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DataAccess\Entities\Client.cs" />
+    <Compile Include="DataAccess\Entities\Report.cs" />
+    <Compile Include="DataAccess\Entities\Role.cs" />
+    <Compile Include="DataAccess\Entities\SoldSystem.cs" />
     <Compile Include="DataAccess\Entities\User.cs" />
     <Compile Include="DataAccess\SoftwareContableDbContext.cs" />
-    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\ModelMapperProfile.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="ModelExtension.cs" />
     <Compile Include="Models\Account\UserLogin.cs" />
     <Compile Include="Models\Account\UserRegister.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Report.cs" />
-    <Compile Include="Models\System.cs" />
+    <Compile Include="Models\SoldSystem.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserRole.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Web.config" />
