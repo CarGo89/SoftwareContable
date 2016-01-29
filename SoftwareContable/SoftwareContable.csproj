@@ -168,6 +168,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\controllers\client-controller.js" />
     <Content Include="Scripts\controllers\create-report-controller.js" />
+    <Content Include="Scripts\controllers\user-registration-controller.js" />
     <Content Include="Scripts\controllers\view-report-controller.js" />
     <Content Include="Scripts\controllers\software-contable-directives.js" />
     <Content Include="Scripts\controllers\user-controller.js" />
@@ -1015,8 +1016,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SoftwareContableController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataAccess\Entities\Client.cs" />
+    <Compile Include="DataAccess\Entities\IEntity.cs" />
     <Compile Include="DataAccess\Entities\Report.cs" />
     <Compile Include="DataAccess\Entities\Role.cs" />
     <Compile Include="DataAccess\Entities\SoldSystem.cs" />
@@ -1027,10 +1030,12 @@
     </Compile>
     <Compile Include="Mappers\ModelMapperProfile.cs" />
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="ModelExtension.cs" />
+    <Compile Include="Extensions\ModelExtension.cs" />
     <Compile Include="Models\Account\UserLogin.cs" />
     <Compile Include="Models\Account\UserRegister.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Models\OptionCatalog.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\SoldSystem.cs" />
     <Compile Include="Models\User.cs" />
@@ -1069,7 +1074,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DataAccess\Repositories\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

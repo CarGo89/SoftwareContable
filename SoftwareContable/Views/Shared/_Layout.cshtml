@@ -27,7 +27,7 @@
         }
     </style>
 </head>
-<body ng-app="softwareContable" date-format="@ViewBag.DateFormat">
+<body ng-app="softwareContable">
 
     <div class="wrapper">
         <div class="header">
@@ -56,20 +56,26 @@
 
                     <div class="collapse navbar-collapse navbar-responsive-collapse">
                         <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "set-loading-panel" })
+                            <li>
+                                @Html.ActionLink("Inicio", "Index", "Home", null, new { @class = "set-loading-panel" })
                             </li>
-                            <li>@Html.ActionLink("Clientes", "Index", "Client", null, new { @class = "set-loading-panel" })
+                            <li>
+                                @Html.ActionLink("Clientes", "Index", "Client", null, new { @class = "set-loading-panel" })
                             </li>
-                            <li>@Html.ActionLink("Usuarios", "Index", "User", null, new { @class = "set-loading-panel" })
+                            <li>
+                                @Html.ActionLink("Usuarios", "Index", "User", null, new { @class = "set-loading-panel" })
                             </li>
 
                             <li class="dropdown">
-                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">Reportes
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                                    Reportes
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li>@Html.ActionLink("Crear", "Create", "Report", null, new { @class = "set-loading-panel" })
+                                    <li>
+                                        @Html.ActionLink("Crear", "Create", "Report", null, new { @class = "set-loading-panel" })
                                     </li>
-                                    <li>@Html.ActionLink("Ver", "Visualize", "Report", null, new { @class = "set-loading-panel" })
+                                    <li>
+                                        @Html.ActionLink("Ver", "Visualize", "Report", null, new { @class = "set-loading-panel" })
                                     </li>
                                 </ul>
                             </li>
@@ -96,18 +102,22 @@
                     <span class="message"></span>
                 </div>
 
-                <div id="warningPanel" class="col-md-offset-4 col-md-4 text-justify alert alert-warning alert-dismissible fade in hidden" role="alert">
+                <div id="warningPanel" class="text-center col-md-offset-4 col-md-4 text-justify alert alert-warning alert-dismissible fade in hidden" role="alert">
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="text-center">Warning!</h4>
-                    <span class="message"></span>
+                    <div class="text-center">
+                        <h4>Alerta!</h4>
+                        <span class="message"></span>
+                    </div>
                 </div>
 
                 <div id="successPanel" class="col-md-offset-4 col-md-4 text-justify alert alert-success alert-dismissible fade in hidden" role="alert">
                     <button type="button" class="close">×</button>
-                    <h4 class="text-center">Success!</h4>
-                    <span class="message"></span>
+                    <div class="text-center">
+                        <h4>Confirmaci&oacute;n!</h4>
+                        <span class="message"></span>
+                    </div>
                 </div>
             </div>
         </div>

@@ -17,11 +17,11 @@
         </div>
     </div>
 
-    <form class="form-horizontal" ng-init="initUrls('@Url.Action("Get", "Client")')">
+    <form class="form-horizontal" ng-init="initUrls('@Url.Action("Get", "Client")', '@Url.Action("Save", "Client")', '@Url.Action("Update", "Client")', '@Url.Action("Validate", "Client")')">
         <div class="container table-results-container">
             <div class="row text-center">
                 <div class="col-md-offset-5 col-md-2">
-                    <button type="button" title="Crear Cliente" class="btn btn-block btn-success" data-toggle="modal" data-target="#newApplicationModal">
+                    <button type="button" title="Crear Cliente" class="btn btn-block btn-success" data-toggle="modal" data-target="#newClientModal">
                         <i class="fa fa-plus-square-o"></i>Crear
                     </button>
                 </div>
@@ -39,6 +39,57 @@
                             </tr>
                         </thead>
                     </table>
+                </div>
+            </div>
+
+            <div id="newClientModal" class="modal fade" tabindex="-1" role="dialog" modal-window onhidden="onNewClientHidden">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="col-md-offset-1 col-md-3 text-justify alert alert-danger alert-validation-messages" ng-hide="validationMessages.length === 0">
+                            <button type="button" class="close" aria-label="Close" ng-click="onNewClientHidden()">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 class="text-center">Error!</h4>
+                            <ul>
+                                <li class="text-danger" ng-repeat="validationMessage in validationMessages">{{ validationMessage }}</li>
+                            </ul>
+                        </div>
+
+                        <div class="modal-header panel-primary">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h2 class="modal-title">Nuevo Cliente</h2>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="txtRCF" class="col-md-4 control-label">RCF</label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="txtRCF" placeholder="RCF" ng-model="newClient.Rfc">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtCorporateName" class="col-md-4 control-label">Raz&oacute;n Social</label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="txtCorporateName" placeholder="Raz&oacute;n Social" ng-model="newClient.CorporateName">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtPhoneNumber" class="col-md-4 control-label">Tel&eacute;fono</label>
+                                <div class="col-md-7">
+                                    <input type="text" class="form-control" id="txtPhoneNumber" placeholder="Tel&eacute;fono" ng-model="newClient.PhoneNumber" integer>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="txtEmail" class="col-md-4 control-label">Email</label>
+                                <div class="col-md-7">
+                                    <input type="email" class="form-control" id="txtEmail" placeholder="Email" ng-model="newClient.Email">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-link" data-dismiss="modal" ng-click="cancel()">Cancelar</a>
+                            <button type="button" class="btn btn-primary" ng-click="save()">Guardar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

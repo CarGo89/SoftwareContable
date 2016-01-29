@@ -1,6 +1,9 @@
-﻿namespace SoftwareContable.Models
+﻿using System.ComponentModel;
+
+namespace SoftwareContable.Models
 {
-    public class Role
+    [DisplayName("roles")]
+    public class Role : IModel
     {
         public int Id { get; set; }
 

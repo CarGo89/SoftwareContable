@@ -1,9 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using SoftwareContable.Models;
 
 namespace SoftwareContable.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : SoftwareContableController<User, DataAccess.Entities.User>
     {
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -17,6 +19,16 @@ namespace SoftwareContable.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> RegisterUser(User user)
+        {
+            user.RoleId = 2;
+
+            var savedUser = await Save(user);
+
+            return savedUser;
         }
 
         [ValidateAntiForgeryToken]

@@ -1,5 +1,5 @@
 ﻿@{
- ViewBag.Title = "Registrar Nuevo Usuario";
+    ViewBag.Title = "Registrar Nuevo Usuario";
     Layout = null;
 }
 
@@ -8,14 +8,14 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Login</title>
+    <title>Registro de Usuario</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/software-contable.css" rel="stylesheet" />
 </head>
-<body>
-    <div class="container">
+<body ng-app="softwareContable">
+    <div ng-controller="userRegistrationController" class="container" ng-init="initUrls('@Url.Action("RegisterUser", "Account")')">
         <div class="col-md-offset-1 col-md-10">
             <div class="account-wall text-center">
                 <h2>Registrar Nuevo Usuario</h2>
@@ -24,25 +24,25 @@
                     <div class="form-group">
                         <label for="txtUser" class="col-md-5 control-label">Usuario</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" id="txtUser" placeholder="Usuario" />
+                            <input type="text" class="form-control" id="txtUser" placeholder="Usuario" ng-model="newUser.UserName" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="txtEmail" class="col-md-5 control-label">Email</label>
                         <div class="col-md-3">
-                            <input type="email" class="form-control" id="txtEmail" placeholder="Email" />
+                            <input type="email" class="form-control" id="txtEmail" placeholder="Email" ng-model="newUser.Email" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="txtPassword" class="col-md-5 control-label">Contraseña</label>
                         <div class="col-md-3">
-                            <input type="password" class="form-control" id="txtPassword" placeholder="Contraseña" />
+                            <input type="password" class="form-control" id="txtPassword" placeholder="Contraseña" ng-model="newUser.Password" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="txtConfirmPassword" class="col-md-5 control-label">Confirmar Contraseña</label>
                         <div class="col-md-3">
-                            <input type="password" class="form-control" id="txtConfirmPassword" placeholder="Confirmar Contraseña" />
+                            <input type="password" class="form-control" id="txtConfirmPassword" placeholder="Confirmar Contraseña" ng-model="newUser.ConfirmationPassword" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -50,11 +50,19 @@
                             <a href='@Url.Action("Login", "Account")' class="btn btn-link">Cancelar</a>
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-primary btn-lg btn-block" title="Registrar Nuevo Usuario">Registrar</button>
+                            <button class="btn btn-primary btn-lg btn-block" title="Registrar Nuevo Usuario" ng-click="register()">Registrar</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    @Scripts.Render(
+        "~/Scripts/jquery-2.2.0.min.js",
+        "~/Scripts/bootstrap.min.js",
+        "~/Scripts/angular.js",
+        "~/Scripts/utilities/software-contable.js",
+        "~/Scripts/controllers/user-registration-controller.js")
 </body>
+</html>

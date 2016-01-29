@@ -1,8 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace SoftwareContable.Models
 {
-    public class Report
+    [DisplayName("reports")]
+    public class Report : IModel
     {
         public int Id { get; set; }
 

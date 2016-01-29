@@ -25,25 +25,25 @@
         };
 
         var columns = [
-            { data: "Name", width: "auto" },
+            { data: "UserName", width: "auto" },
             { data: "Email", width: "auto" },
-            { data: "Role", width: "auto" }
+            { data: "Role.Name", width: "auto" }
         ];
 
-        angular.element(document).ready(function() {
+        angular.element(document).ready(function () {
             userResults = $("#userResults").dataTable({
                 responsive: true,
                 autoWidth: true,
                 deferRender: true,
                 language: {
                     search: "Filtro:",
-                    searchPlaceholder: "Filtrar Usuarios",
-                    emptyTable: "No se encontraron Usuarios",
+                    searchPlaceholder: "Filtrar Users",
+                    emptyTable: "No se encontraron Users",
                     zeroRecords: "No se encontraron coincidencias",
-                    lengthMenu: "Mostrar _MENU_ Usuarios",
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ Usuarios",
-                    infoEmpty: "Mostrando 0 a 0 de 0 Usuarios",
-                    infoFiltered: "(filtro de _MAX_ total Usuarios)"
+                    lengthMenu: "Mostrar _MENU_ Users",
+                    info: "Mostrando _START_ a _END_ de _TOTAL_ Users",
+                    infoEmpty: "Mostrando 0 a 0 de 0 Users",
+                    infoFiltered: "(filtro de _MAX_ total Users)"
                 },
                 columns: columns
             });
@@ -56,6 +56,7 @@
 
             ajax.get(getUrl, false, function (data, textStatus, jqXhr) {
                 $scope.users = data.users;
+                $scope.roles = data.roles;
 
                 userResults.fnClearTable();
 
@@ -72,7 +73,14 @@
             });
         };
 
+        $scope.users = [];
+        $scope.newUser = {};
+        $scope.validationMessages = [];
+        $scope.updateValidationMessages = [];
+        $scope.newUserModal = {};
+
         $scope.initUrls = initUrls;
         $scope.get = getUsers;
+        $scope.onNewUserHidden = onNewUserHidden;
     }]);
 })(window.jQuery, window.angular);

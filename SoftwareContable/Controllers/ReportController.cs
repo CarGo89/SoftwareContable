@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
 using Dpr.Core.DataAccess;
+using SoftwareContable.Extensions;
 using SoftwareContable.Models;
 
 namespace SoftwareContable.Controllers

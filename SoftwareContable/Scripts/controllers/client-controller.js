@@ -73,7 +73,49 @@
             });
         };
 
+        var saveClients = function() {
+            $scope.validationMessages = [];
+
+            ajax.post(urls.validate, $scope.newClient, function (data, textStatus, jqXhr) {
+                if (data === true) {
+                    ajax.post(urls.save, $scope.newClient, function (data, textStatus, jqXhr) {
+                        setSuccessMessage("Cliente guardado correctamente.");
+
+                        $scope.newClientModal.modal("hide");
+
+                        $scope.get();
+                    });
+                }
+                else if (data.length > 0) {
+                    $scope.validationMessages = data;
+
+                    $scope.$apply();
+                }
+            });
+        };
+
+        var updateClient = function () {
+
+        };
+
+        var onNewClientHidden = function (event) {
+            $scope.newClient = {};
+
+            $scope.validationMessages = [];
+
+            $scope.$apply();
+        };
+
+        $scope.clients = [];
+        $scope.newClient = {};
+        $scope.validationMessages = [];
+        $scope.updateValidationMessages = [];
+        $scope.newClientModal = {};
+
         $scope.initUrls = initUrls;
         $scope.get = getClients;
+        $scope.update = updateClient;
+        $scope.save = saveClients;
+        $scope.onNewClientHidden = onNewClientHidden;
     }]);
 })(window.jQuery, window.angular);

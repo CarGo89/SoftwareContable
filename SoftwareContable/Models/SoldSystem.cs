@@ -1,7 +1,9 @@
-﻿
+﻿using System.ComponentModel;
+
 namespace SoftwareContable.Models
 {
-    public class SoldSystem
+    [DisplayName("soldSystems")]
+    public class SoldSystem : IModel
     {
         public int Id { get; set; }
 
