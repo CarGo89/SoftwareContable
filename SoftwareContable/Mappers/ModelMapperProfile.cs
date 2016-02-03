@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using SoftwareContable.Models;
 
 namespace SoftwareContable.Mappers
