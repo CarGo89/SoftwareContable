@@ -11,6 +11,7 @@ using SoftwareContable.DataAccess;
 using SoftwareContable.DataAccess.Entities;
 using SoftwareContable.Extensions;
 using SoftwareContable.Models;
+using SoftwareContable.Utilities;
 
 namespace SoftwareContable.Controllers
 {
@@ -26,6 +27,21 @@ namespace SoftwareContable.Controllers
 
         protected static readonly IDictionary<Type, string> ModelDescriptionsByType;
 
+        protected static readonly SettingsManager Settings;
+
+        protected string SiteBaseUrl
+        {
+            get
+            {
+                if (Request != null && Request.Url != null)
+                {
+                    return string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
+                }
+
+                return null;
+            }
+        }
+
         #endregion Fields
 
         #region Constructors
@@ -33,6 +49,8 @@ namespace SoftwareContable.Controllers
         static SoftwareContableController()
         {
             ModelDescriptionsByType = new Dictionary<Type, string>();
+
+            Settings = SettingsManager.Instance;
         }
 
         protected SoftwareContableController()
@@ -77,10 +95,10 @@ namespace SoftwareContable.Controllers
                 return GetValidationMessages().ToJsonResult();
             }
 
-            var dbApplication = Mapper.Map<TData>(model);
-            var savedDbApplication = await ModelRepository.Add(dbApplication);
+            var dbModel = Mapper.Map<TData>(model);
+            var savedDbModel = await ModelRepository.Add(dbModel);
 
-            model = Mapper.Map<TModel>(savedDbApplication);
+            model = Mapper.Map<TModel>(savedDbModel);
 
             return model.ToJsonResult();
         }
@@ -93,13 +111,13 @@ namespace SoftwareContable.Controllers
                 return GetValidationMessages().ToJsonResult();
             }
 
-            var dbApplication = Mapper.Map<TData>(model);
+            var dbModel = Mapper.Map<TData>(model);
 
-            dbApplication = await ModelRepository.Update(dbApplication);
+            dbModel = await ModelRepository.Update(dbModel);
 
-            var updatedModel = Mapper.Map<TModel>(dbApplication);
+            model = Mapper.Map<TModel>(dbModel);
 
-            return updatedModel.ToJsonResult();
+            return model.ToJsonResult();
         }
 
         [HttpPost]

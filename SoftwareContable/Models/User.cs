@@ -26,6 +26,8 @@ namespace SoftwareContable.Models
         [MaxLength(255, ErrorMessage = "Confirmar Contraseña excede la longitud de 255 caracteres.")]
         public string ConfirmationPassword { get; set; }
 
+        public bool IsAuthorized { get; set; }
+
         public int RoleId { get; set; }
 
         public Role Role { get; set; }
