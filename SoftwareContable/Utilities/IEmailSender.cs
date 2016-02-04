@@ -16,9 +16,9 @@ namespace SoftwareContable.Utilities
         /// <param name="from">The address of the sender.</param>
         /// <param name="recipients">The address of the recipients.</param>
         /// <param name="subject">The subject text.</param>
-        /// <param name="body">The message body</param>
+        /// <param name="htmlBody">The message body</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        Task Send(string from, IEnumerable<string> recipients, string subject, string body);
+        Task Send(string from, IEnumerable<string> recipients, string subject, string htmlBody);
 
         #endregion Methods
     }

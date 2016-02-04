@@ -40,9 +40,9 @@ namespace SoftwareContable.Utilities
         /// <param name="from">The address of the sender.</param>
         /// <param name="recipients">The address of the recipients.</param>
         /// <param name="subject">The subject text.</param>
-        /// <param name="body">The message body</param>
+        /// <param name="htmlBody">The message body</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
-        public async Task Send(string from, IEnumerable<string> recipients, string subject, string body)
+        public async Task Send(string from, IEnumerable<string> recipients, string subject, string htmlBody)
         {
             using (var smtpClient = new SmtpClient(_smtpServer))
             {
@@ -52,7 +52,7 @@ namespace SoftwareContable.Utilities
                 smtpClient.UseDefaultCredentials = false;
                 smtpClient.Credentials = new NetworkCredential(SettingsManager.Instance.SmtpEmail, SettingsManager.Instance.SmtpPassword);
 
-                using (var message = new MailMessage(from, flatRecipients, subject, body))
+                using (var message = new MailMessage(from, flatRecipients, subject, htmlBody))
                 {
                     message.IsBodyHtml = true;
 

@@ -29,6 +29,8 @@ namespace SoftwareContable.Controllers
 
         protected static readonly SettingsManager Settings;
 
+        protected Models.User LoggedInUser { get; private set; }
+
         protected string SiteBaseUrl
         {
             get
@@ -67,6 +69,8 @@ namespace SoftwareContable.Controllers
 
                 ModelDescriptionsByType[tModel] = ModelDescription;
             }
+
+            LoggedInUser = new Models.User { Id = 1, RoleId = 2, IsAuthorized = true };
         }
 
         #endregion Constructors

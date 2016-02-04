@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using SoftwareContable.Utilities;
 
 namespace SoftwareContable.Models
 {
@@ -31,5 +32,12 @@ namespace SoftwareContable.Models
         public int RoleId { get; set; }
 
         public Role Role { get; set; }
+
+        public int? AuthorizedByUserId { get; set; }
+
+        public bool IsAdministrator()
+        {
+            return IsAuthorized && RoleId == SettingsManager.Instance.AdministratorUserRoleDbId;
+        }
     }
 }

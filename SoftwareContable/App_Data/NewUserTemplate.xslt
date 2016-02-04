@@ -7,9 +7,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
   <xsl:output method="html" indent="yes" />
-  
+
   <xsl:param name="UsersUrlParam"></xsl:param>
-  
+
   <xsl:template match="/">
     <html xmlns="http://www.w3.org/1999/xhtml">
       <head>
@@ -38,7 +38,6 @@
         <xsl:variable name="Email" select="User/Email" />
 
         <p>Estimado Administrador:</p>
-        <xsl:value-of select="$UsersUrlParam" />
 
         <p>
           El usuario <strong>

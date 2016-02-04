@@ -8,7 +8,7 @@ namespace SoftwareContable.DataAccess.Entities
         [Key, DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
+        [Required, Index(IsUnique = true)]
         [Column(TypeName = "VARCHAR"), MaxLength(255)]
         public string UserName { get; set; }
 
@@ -27,5 +27,9 @@ namespace SoftwareContable.DataAccess.Entities
         public int RoleId { get; set; }
 
         public virtual Role Role { get; set; }
+
+        public int? AuthorizedByUserId { get; set; }
+
+        public virtual User AuthorizedByUser { get; set; }
     }
 }

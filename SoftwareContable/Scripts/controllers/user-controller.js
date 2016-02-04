@@ -17,17 +17,18 @@
             validate: ""
         };
 
-        var initUrls = function (getUrl, saveUrl, updateUrl, validateUrl) {
+        var initUrls = function (getUrl, saveUrl, authorizeUrl, validateUrl) {
             urls.get = getUrl;
             urls.save = saveUrl;
-            urls.update = updateUrl;
+            urls.authorize = authorizeUrl;
             urls.validate = validateUrl;
         };
 
         var columns = [
             { data: "UserName", width: "auto" },
             { data: "Email", width: "auto" },
-            { data: "Role.Name", width: "auto" }
+            { data: "Role.Name", width: "auto" },
+            { data: "IsAuthorized", width: "auto" }
         ];
 
         angular.element(document).ready(function () {
@@ -45,7 +46,28 @@
                     infoEmpty: "Mostrando 0 a 0 de 0 Users",
                     infoFiltered: "(filtro de _MAX_ total Users)"
                 },
-                columns: columns
+                columns: columns,
+                columnDefs: [
+                {
+                    targets: [3],
+                    createdCell: function (td, cellData, rowData, row, col) {
+                        var jqTd = $(td).addClass("text-center").text("");
+
+                        if (cellData === true) {
+                            jqTd.text("Autorizado");
+                        }
+                        else if ($scope.isLoggedInUserAdmin) {
+                            var htmlBtnAuthorize = "<button class='btn btn-sm btn-success' ng-click='authorizeUser(";
+
+                            htmlBtnAuthorize = htmlBtnAuthorize.concat(rowData.Id).concat(")'>Autorizar</button>");
+
+                            jqTd.append(htmlBtnAuthorize);
+                        } else {
+
+                            jqTd.text("No Autorizado");
+                        }
+                    }
+                }]
             });
 
             $scope.get();
@@ -56,7 +78,7 @@
 
             ajax.get(getUrl, false, function (data, textStatus, jqXhr) {
                 $scope.users = data.users;
-                $scope.roles = data.roles;
+                $scope.isLoggedInUserAdmin = data.isLoggedInUserAdmin;
 
                 userResults.fnClearTable();
 
@@ -73,6 +95,19 @@
             });
         };
 
+        var authorizeUser = function (userId) {
+            var url = urls.authorize.concat("/").concat(userId);
+
+            ajax.put(url, null, function (data, textStatus, jqXhr) {
+                if (data === true) {
+                    $scope.get();
+                }
+                else {
+                    window.setWarningMessage(data);
+                }
+            });
+        };
+
         $scope.users = [];
         $scope.newUser = {};
         $scope.validationMessages = [];
@@ -81,6 +116,6 @@
 
         $scope.initUrls = initUrls;
         $scope.get = getUsers;
-        $scope.onNewUserHidden = onNewUserHidden;
+        $scope.authorizeUser = authorizeUser;
     }]);
 })(window.jQuery, window.angular);
