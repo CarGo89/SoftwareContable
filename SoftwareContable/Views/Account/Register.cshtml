@@ -9,15 +9,55 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Registro de Usuario</title>
+
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/software-contable.css" rel="stylesheet" />
+
+    @* loadingPanel set to active just when page is loaded *@
+    <style>
+        #loadingPanel {
+            display: table;
+        }
+    </style>
 </head>
 <body ng-app="softwareContable">
     <div ng-controller="userRegistrationController" class="container" ng-init="initUrls('@Url.Action("RegisterUser", "Account")')">
         <div class="col-md-offset-1 col-md-10">
+            <div class="alert-messages-section">
+                <div class="row">
+
+                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-danger alert-validation-messages" ng-hide="!errorMessages || errorMessages.length === 0">
+                        <button type="button" class="close" aria-label="Close" ng-click="errorMessages = []">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="text-center">Error!</h4>
+                        <ul>
+                            <li class="text-danger" ng-repeat="errorMessage in errorMessages">{{ errorMessage }}</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-success alert-validation-messages" ng-hide="!successMessages || successMessages.length === 0">
+                        <button type="button" class="close" aria-label="Close" ng-click="successMessages = []">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="text-center">Confirmaci&oacute;n!</h4>
+                        <ul class="list-unstyled">
+                            <li class="text-success" ng-repeat="successMessage in successMessages">{{ successMessage }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <div class="account-wall text-center">
+                <div id="loadingPanel">
+                    <div>
+                        Page Loading...<br />
+                        <i class="fa fa-5x fa-circle-o-notch fa-spin"></i>
+                    </div>
+                </div>
+
                 <h2>Registrar Nuevo Usuario</h2>
 
                 <form class="form-horizontal voffset5">
@@ -59,10 +99,10 @@
     </div>
 
     @Scripts.Render(
-        "~/Scripts/jquery-2.2.0.min.js",
-        "~/Scripts/bootstrap.min.js",
-        "~/Scripts/angular.js",
-        "~/Scripts/utilities/software-contable.js",
-        "~/Scripts/controllers/user-registration-controller.js")
+    "~/Scripts/jquery-2.2.0.min.js",
+    "~/Scripts/bootstrap.min.js",
+    "~/Scripts/angular.js",
+    "~/Scripts/utilities/software-contable.js",
+    "~/Scripts/controllers/user-registration-controller.js")
 </body>
 </html>

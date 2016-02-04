@@ -15,8 +15,26 @@
         };
 
         var register = function () {
+            window.ajaxLoadingPanel.css("display", "table");
+
             ajax.post(urls.registerUrl, $scope.newUser, function (data, textStatus, jqXhr) {
-                data;
+                if (data.Id > 0) {
+                    var successMessage = data.UserName.concat(", gracias por registrarte!");
+
+                    $scope.successMessages = [successMessage];
+                    $scope.newUser = {};
+                    $scope.errorMessages = [];
+                }
+                else {
+                    $scope.successMessages = [];
+
+                    if (typeof data === "string") {
+                        $scope.errorMessages = [data];
+                    }
+                    else {
+                        $scope.errorMessages = data;
+                    }
+                }
 
                 $scope.$applyAsync(function () {
                     window.ajaxLoadingPanel.css("display", "none");
@@ -25,7 +43,8 @@
         };
 
         $scope.newUser = {};
-        $scope.validationMessages = [];
+        $scope.errorMessages = [];
+        $scope.successMessages = [];
 
         $scope.initUrls = initUrls;
         $scope.register = register;
