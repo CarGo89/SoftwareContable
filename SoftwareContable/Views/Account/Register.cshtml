@@ -23,7 +23,7 @@
     </style>
 </head>
 <body ng-app="softwareContable">
-    <div ng-controller="userRegistrationController" class="container" ng-init="initUrls('@Url.Action("RegisterUser", "Account")')">
+    <div ng-controller="userRegistrationController" class="container" ng-init="initRegistrationUrls('@Url.Action("RegisterUser", "Account")')">
         <div class="col-md-offset-1 col-md-10">
             <div class="alert-messages-section">
                 <div class="row">
@@ -99,10 +99,10 @@
     </div>
 
     @Scripts.Render(
-    "~/Scripts/jquery-2.2.0.min.js",
-    "~/Scripts/bootstrap.min.js",
-    "~/Scripts/angular.js",
-    "~/Scripts/utilities/software-contable.js",
-    "~/Scripts/controllers/user-registration-controller.js")
+        "~/Scripts/jquery-2.2.0.min.js",
+        "~/Scripts/bootstrap.min.js",
+        "~/Scripts/angular.js",
+        "~/Scripts/utilities/software-contable.js",
+        "~/Scripts/controllers/user-registration-controller.js")
 </body>
 </html>

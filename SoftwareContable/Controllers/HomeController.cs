@@ -1,10 +1,11 @@
 ﻿using System.Web.Mvc;
+using SoftwareContable.Models;
 
 namespace SoftwareContable.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : SoftwareContableController<User, DataAccess.Entities.User>
     {
-        // GET: Home
         public ActionResult Index()
         {
             return View();

@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SoftwareContable.Utilities
+<!DOCTYPE html>
 <meta http-equiv="X-UA-Compatible" content="IE=11" />
 
 <html lang="en">
@@ -36,7 +37,7 @@
                     <ul class="loginbar pull-right">
                         <li>
                             <a>
-                                <i class="fa fa-user fa-1x"></i>User Name
+                                <i class="fa fa-user fa-1x"></i>@LoggedInUserInfo.User.UserName
                             </a>
                             <a class="log-off" href='@Url.Action("LogOff", "Account")'>
                                 <i class="fa fa-power-off fa-1x"></i>Cerrar Sesi&oacute;n

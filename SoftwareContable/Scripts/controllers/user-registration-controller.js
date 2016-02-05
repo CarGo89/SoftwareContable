@@ -7,11 +7,34 @@
         var ajax = new AjaxProvider();
 
         var urls = {
+            loginUrl: "",
             registerUrl: ""
         };
 
-        var initUrls = function (registerUrl) {
+        var initRegistrationUrls = function (registerUrl) {
             urls.registerUrl = registerUrl;
+        };
+
+        var initLoginUrls = function (loginUrl) {
+            urls.loginUrl = loginUrl;
+        };
+
+        var login = function () {
+            ajax.post(urls.registerUrl, $scope.loginUser, function (data, textStatus, jqXhr) {
+                if (data.returnUrl && data.returnUrl.length > 0) {
+                    window.location.href = data.returnUrl;
+                }
+                else {
+                    if (typeof data === "string") {
+                        $scope.errorMessages = [data];
+                    }
+                    else {
+                        $scope.errorMessages = data;
+                    }
+                }
+
+                $scope.$apply();
+            });
         };
 
         var register = function () {
@@ -36,17 +59,21 @@
                     }
                 }
 
-                $scope.$applyAsync(function () {
+                $scope.$apply(function () {
                     window.ajaxLoadingPanel.css("display", "none");
                 });
             });
         };
 
         $scope.newUser = {};
+        $scope.loginUser = {};
         $scope.errorMessages = [];
         $scope.successMessages = [];
 
-        $scope.initUrls = initUrls;
+        $scope.initRegistrationUrls = initRegistrationUrls;
+        $scope.initLoginUrls = initLoginUrls;
+
+        $scope.login = login;
         $scope.register = register;
     }]);
 })(window.jQuery, window.angular);

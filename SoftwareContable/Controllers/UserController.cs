@@ -5,9 +5,11 @@ using System.Web.Mvc;
 using AutoMapper;
 using SoftwareContable.Extensions;
 using SoftwareContable.Models;
+using SoftwareContable.Utilities;
 
 namespace SoftwareContable.Controllers
 {
+    [Authorize]
     public class UserController : SoftwareContableController<User, DataAccess.Entities.User>
     {
         public ActionResult Index()
@@ -18,13 +20,13 @@ namespace SoftwareContable.Controllers
         [HttpGet]
         public override async Task<ActionResult> Get()
         {
-            var dbUsers = await ModelRepository.GetAll();
+            var dbUsers = await ModelRepository.GetAllAsync();
             var users = Mapper.Map<IEnumerable<User>>(dbUsers);
 
             var jsonResult = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
             {
                 { "users", users },
-                { "isLoggedInUserAdmin", LoggedInUser.IsAdministrator() }
+                { "isLoggedInUserAdmin", LoggedInUserInfo.User.IsAdministrator() }
             };
 
             return jsonResult.ToJsonResult();
@@ -33,13 +35,13 @@ namespace SoftwareContable.Controllers
         [HttpPut]
         public async Task<ActionResult> Authorize(int userId)
         {
-            if (!LoggedInUser.IsAdministrator())
+            if (!LoggedInUserInfo.User.IsAdministrator())
             {
                 return "Sólo administradores pueden autorizar acceso a usuarios.".ToJsonResult();
             }
 
             var userToAuthorize = await ModelRepository
-                .Single(user => user.Id == userId).ConfigureAwait(false);
+                .SingleAsync(user => user.Id == userId).ConfigureAwait(false);
 
             if (userToAuthorize == null)
             {
@@ -52,9 +54,9 @@ namespace SoftwareContable.Controllers
             }
 
             userToAuthorize.IsAuthorized = true;
-            userToAuthorize.AuthorizedByUserId = LoggedInUser.Id;
+            userToAuthorize.AuthorizedByUserId = LoggedInUserInfo.User.Id;
 
-            await ModelRepository.Update(userToAuthorize).ConfigureAwait(false);
+            await ModelRepository.UpdateAsync(userToAuthorize).ConfigureAwait(false);
 
             return true.ToJsonResult();
         }

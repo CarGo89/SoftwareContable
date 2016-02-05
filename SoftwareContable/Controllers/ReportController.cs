@@ -9,6 +9,7 @@ using SoftwareContable.Models;
 
 namespace SoftwareContable.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         private readonly IRepository<DataAccess.Entities.Report> _reportRepository;
@@ -31,7 +32,7 @@ namespace SoftwareContable.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-            var dbReports = await _reportRepository.GetAll();
+            var dbReports = await _reportRepository.GetAllAsync();
             var reports = Mapper.Map<IEnumerable<Report>>(dbReports);
 
             var jsonResult = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)

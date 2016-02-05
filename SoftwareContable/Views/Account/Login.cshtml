@@ -13,8 +13,23 @@
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/software-contable.css" rel="stylesheet" />
 </head>
-<body>
-    <div class="container">
+<body ng-app="softwareContable">
+    <div ng-controller="userRegistrationController" class="container" ng-init="initLoginUrls('@Url.Action("Login", "Account")')">
+        <div class="alert-messages-section">
+            <div class="row">
+
+                <div class="col-md-offset-3 col-md-4 text-justify alert alert-danger alert-validation-messages" ng-hide="!errorMessages || errorMessages.length === 0">
+                    <button type="button" class="close" aria-label="Close" ng-click="errorMessages = []">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="text-center">Error!</h4>
+                    <ul class="text-center list-unstyled">
+                        <li class="text-danger" ng-repeat="errorMessage in errorMessages">{{ errorMessage }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div class="col-md-offset-4 col-md-6 col-md-4">
             <div class="account-wall text-center">
                 <h2>Software Contable</h2>
@@ -22,16 +37,23 @@
                 <i class="fa fa-user fa-6x profile-img text-primary"></i>
 
                 <form class="form-signin">
-                    <input type="text" class="form-control" placeholder="Usuario" />
-                    <input type="password" class="form-control" placeholder="Contraseña" />
+                    <input type="text" class="form-control" placeholder="Usuario" ng-model="loginUser.UserName" />
+                    <input type="password" class="form-control" placeholder="Contraseña" ng-model="loginUser.Password" />
 
-                    <a href='@Url.Action("Index", "Home")' class="btn btn-primary btn-lg btn-block">
+                    <button class="btn btn-primary btn-lg btn-block" ng-click="login()">
                         Iniciar Sesi&oacute;n
-                    </a>
+                    </button>
                 </form>
             </div>
             <a href='@Url.Action("Register", "Account")' class="text-center new-account">Registrarse</a>
         </div>
     </div>
+
+    @Scripts.Render(
+        "~/Scripts/jquery-2.2.0.min.js",
+        "~/Scripts/bootstrap.min.js",
+        "~/Scripts/angular.js",
+        "~/Scripts/utilities/software-contable.js",
+        "~/Scripts/controllers/user-registration-controller.js")
 </body>
 </html>

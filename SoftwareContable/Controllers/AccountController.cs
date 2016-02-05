@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Security;
 using AutoMapper;
 using SoftwareContable.Extensions;
 using SoftwareContable.Models;
@@ -29,14 +30,41 @@ namespace SoftwareContable.Controllers
             _emailSender = new EmailSender(Settings.SmtpServer);
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login(string returnUrl = "")
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             ViewBag.ReturnUrl = returnUrl;
 
             return View();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Login(User user, string returnUrl = "")
+        {
+            var existingUser = await ModelRepository.SingleAsync(dbUser => dbUser.IsAuthorized &&
+                string.Equals(dbUser.UserName, user.UserName, StringComparison.InvariantCultureIgnoreCase) &&
+                string.Equals(dbUser.Password, user.Password));
+
+            if (existingUser == null)
+            {
+                return "El usuario o la contraseña es incorrecta.".ToJsonResult();
+            }
+
+            FormsAuthentication.SetAuthCookie(user.UserName, true);
+
+            returnUrl = string.IsNullOrWhiteSpace(returnUrl) ? Url.Action("Index", "Home") : returnUrl;
+
+            return Json(new { returnUrl });
+        }
+
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -48,6 +76,7 @@ namespace SoftwareContable.Controllers
             return View();
         }
 
+        [HttpPost]
         [AllowAnonymous]
         public async Task<ActionResult> RegisterUser(User user)
         {
@@ -57,7 +86,7 @@ namespace SoftwareContable.Controllers
             }
 
             var existsUserName = await ModelRepository
-                .Single(existingUser => string.Equals(existingUser.UserName, user.UserName, StringComparison.InvariantCultureIgnoreCase)).ConfigureAwait(false);
+                .SingleAsync(existingUser => string.Equals(existingUser.UserName, user.UserName, StringComparison.InvariantCultureIgnoreCase)).ConfigureAwait(false);
 
             if (existsUserName != null)
             {
@@ -69,12 +98,12 @@ namespace SoftwareContable.Controllers
 
             var userToSave = Mapper.Map<DataAccess.Entities.User>(user);
 
-            userToSave = await ModelRepository.Add(userToSave).ConfigureAwait(false);
+            userToSave = await ModelRepository.AddAsync(userToSave).ConfigureAwait(false);
 
             var savedUser = Mapper.Map<User>(userToSave);
 
             var recipients = (await ModelRepository
-                .GetAll(admin => admin.RoleId == Settings.AdministratorUserRoleDbId))
+                .GetAllAsync(admin => admin.RoleId == Settings.AdministratorUserRoleDbId))
                 .Select(admin => admin.Email);
 
             var htmlBody = user.GetHtmlFromXslt(Server.MapPath(Settings.NewUserTemplateFilePath), XsltParameters);
@@ -84,9 +113,11 @@ namespace SoftwareContable.Controllers
             return savedUser.ToJsonResult();
         }
 
-        [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult LogOff()
         {
+            FormsAuthentication.SignOut();
+
             return RedirectToAction("Login");
         }
     }

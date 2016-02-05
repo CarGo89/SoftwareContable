@@ -29,8 +29,6 @@ namespace SoftwareContable.Controllers
 
         protected static readonly SettingsManager Settings;
 
-        protected Models.User LoggedInUser { get; private set; }
-
         protected string SiteBaseUrl
         {
             get
@@ -69,8 +67,6 @@ namespace SoftwareContable.Controllers
 
                 ModelDescriptionsByType[tModel] = ModelDescription;
             }
-
-            LoggedInUser = new Models.User { Id = 1, RoleId = 2, IsAuthorized = true };
         }
 
         #endregion Constructors
@@ -80,7 +76,7 @@ namespace SoftwareContable.Controllers
         [HttpGet]
         public virtual async Task<ActionResult> Get()
         {
-            var dbModels = await ModelRepository.GetAll();
+            var dbModels = await ModelRepository.GetAllAsync();
             var models = Mapper.Map<IEnumerable<TModel>>(dbModels);
 
             var jsonResult = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
@@ -100,7 +96,7 @@ namespace SoftwareContable.Controllers
             }
 
             var dbModel = Mapper.Map<TData>(model);
-            var savedDbModel = await ModelRepository.Add(dbModel);
+            var savedDbModel = await ModelRepository.AddAsync(dbModel);
 
             model = Mapper.Map<TModel>(savedDbModel);
 
@@ -117,7 +113,7 @@ namespace SoftwareContable.Controllers
 
             var dbModel = Mapper.Map<TData>(model);
 
-            dbModel = await ModelRepository.Update(dbModel);
+            dbModel = await ModelRepository.UpdateAsync(dbModel);
 
             model = Mapper.Map<TModel>(dbModel);
 
@@ -141,7 +137,10 @@ namespace SoftwareContable.Controllers
 
         protected override void OnAuthentication(AuthenticationContext filterContext)
         {
-            //UserInfo.PrincipalUser = filterContext.HttpContext.User;
+            if (filterContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                LoggedInUserInfo.PrincipalUser = filterContext.HttpContext.User;
+            }
 
             base.OnAuthentication(filterContext);
         }
