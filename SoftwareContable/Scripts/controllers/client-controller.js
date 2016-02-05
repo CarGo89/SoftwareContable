@@ -1,12 +1,13 @@
 ﻿(function ($, angular) {
     "use strict";
 
-    var clientController = angular.module("softwareContable", []);
+    var softwareContable = angular.module("softwareContable", []);
 
-    clientController.directive("integer", angularDirectives.integer);
-    clientController.directive("modalWindow", angularDirectives.modalWindow);
+    softwareContable.directive("inlineEdit", angularDirectives.inlineEdit);
+    softwareContable.directive("integer", angularDirectives.integer);
+    softwareContable.directive("modalWindow", angularDirectives.modalWindow);
 
-    clientController.controller("clientController", ["$scope", "$compile", function ($scope, $compile) {
+    softwareContable.controller("clientController", ["$scope", "$compile", function ($scope, $compile) {
         var ajax = new AjaxProvider();
         var clientResults = {};
 
@@ -46,7 +47,28 @@
                     infoEmpty: "Mostrando 0 a 0 de 0 Clientes",
                     infoFiltered: "(filtro de _MAX_ total Clientes)"
                 },
-                columns: columns
+                columns: columns,
+                columnDefs: [
+                   {
+                       targets: [0, 1, 2, 3],
+                       createdCell: function (td, cellData, rowData, row, col) {
+                           var field = columns[col].data;
+                           var integerInput = "";
+
+                           if (typeof cellData === "number") {
+                               integerInput = "integer";
+                           }
+
+                           cellData = (cellData || "");
+
+                           $(td).text("")
+                               .data("rowData", rowData)
+                               .append(("<span class='inline-edit-label' inline-edit-field=").concat(field).concat(" on-inline-edited='update'>").concat(cellData).concat("</span>"))
+                               .append(("<input type='text'' class='form-control hidden inline-edit-input' ").concat(integerInput).concat(" value=").concat(cellData).concat(" />"))
+                               .attr("inline-edit", "");
+                       }
+                   }
+                ]
             });
 
             $scope.get();
@@ -73,7 +95,7 @@
             });
         };
 
-        var saveClients = function() {
+        var saveClients = function () {
             $scope.validationMessages = [];
 
             ajax.post(urls.validate, $scope.newClient, function (data, textStatus, jqXhr) {
@@ -94,8 +116,23 @@
             });
         };
 
-        var updateClient = function () {
+        var updateClient = function (field, oldValue, newValue, rowData, onValidation) {
+            $scope.updateValidationMessages = [];
 
+            ajax.post(urls.validate, rowData, function (data, textStatus, jqXHR) {
+                onValidation.call(this, data);
+
+                if (data === true) {
+                    ajax.put(urls.update, rowData, function (data, textStatus, jqXHR) {
+                        setSuccessMessage("Cliente actualizado correctamente.");
+                    });
+                }
+                else if (data.length > 0) {
+                    $scope.updateValidationMessages = data;
+
+                    $scope.$apply();
+                }
+            });
         };
 
         var onNewClientHidden = function (event) {

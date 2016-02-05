@@ -1,12 +1,12 @@
 ﻿(function ($, angular) {
     "use strict";
 
-    var reportController = angular.module("softwareContable", []);
+    var softwareContable = angular.module("softwareContable", []);
 
-    reportController.directive("integer", angularDirectives.integer);
-    reportController.directive("modalWindow", angularDirectives.modalWindow);
+    softwareContable.directive("integer", angularDirectives.integer);
+    softwareContable.directive("modalWindow", angularDirectives.modalWindow);
 
-    reportController.controller("viewReportController", ["$scope", "$compile", function ($scope, $compile) {
+    softwareContable.controller("viewReportController", ["$scope", "$compile", function ($scope, $compile) {
         var ajax = new AjaxProvider();
         var reportResults = {};
 

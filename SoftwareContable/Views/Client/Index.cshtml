@@ -20,6 +20,16 @@
     <form class="form-horizontal" ng-init="initUrls('@Url.Action("Get", "Client")', '@Url.Action("Save", "Client")', '@Url.Action("Update", "Client")', '@Url.Action("Validate", "Client")')">
         <div class="container table-results-container">
             <div class="row text-center">
+                <div class="col-md-offset-4 col-md-3 text-justify alert alert-danger alert-validation-messages" ng-hide="updateValidationMessages.length === 0">
+                    <button type="button" class="close" aria-label="Close" ng-click="updateValidationMessages = []">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="text-center">Error!</h4>
+                    <ul>
+                        <li class="text-danger" ng-repeat="updateValidationMessage in updateValidationMessages">{{ updateValidationMessage }}</li>
+                    </ul>
+                </div>
+
                 <div class="col-md-offset-5 col-md-2">
                     <button type="button" title="Crear Cliente" class="btn btn-block btn-success" data-toggle="modal" data-target="#newClientModal">
                         <i class="fa fa-plus-square-o"></i>Crear

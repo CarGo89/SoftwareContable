@@ -2,6 +2,109 @@
     "use strict";
 
     window.angularDirectives = {
+        inlineEdit: function () {
+            var calculateWidth = function (element) {
+                var inputValue = (element.val() || "");
+
+                if (inputValue.length === 0) {
+                    return "100px";
+                }
+
+                return ((inputValue.length + 4) * 8).toString().concat("px");
+            };
+
+            return {
+                restrict: "A",
+
+                link: function (scope, element, attrs) {
+                    element.off("click").on("click", function () {
+                        var label = element.children(".inline-edit-label");
+                        var input = element.children(".inline-edit-input");
+                        var isSelect = (input.is("select") === true);
+                        var isCheckbox = (input.is(":checkbox") === true);
+                        var rowData = element.data("rowData");
+
+                        if (input.hasClass("hidden") !== true) {
+                            return;
+                        }
+
+                        label.addClass("hidden");
+
+                        if (!isSelect) {
+                            input.css("width", calculateWidth(input));
+                        }
+
+                        input.removeClass("hidden").focus().off("change").on("change", function () {
+                            var oldValue = label.text();
+                            var newValue = input.val();
+                            var newValueId = 0;
+                            var options = [];
+
+                            input.blur();
+
+                            if (isSelect) {
+                                var optionsField = input.attr("inline-edit-options");
+
+                                options = scope[optionsField];
+
+                                newValueId = parseInt(newValue, 10);
+
+                                newValue = options[newValueId].Value;
+                            }
+
+                            if (isCheckbox) {
+                                newValue = (input.is(":checked") === true);
+                            }
+
+                            if (oldValue === newValue) {
+                                return;
+                            }
+
+                            var field = label.attr("inline-edit-field");
+                            var onInlineEdited = label.attr("on-inline-edited");
+
+                            label.text(newValue);
+
+                            if (isSelect) {
+                                rowData[field] = newValueId;
+                            }
+
+                            if (input.is("input")) {
+                                rowData[field] = newValue;
+                            }
+
+                            if (typeof scope[onInlineEdited] === "function") {
+                                scope[onInlineEdited].call(this, field, oldValue, newValue, rowData,
+                                    function (isValid) {
+                                        if (isValid !== true) {
+                                            label.text(oldValue);
+
+                                            if (isSelect) {
+                                                rowData[field] = oldValue;
+                                            }
+
+                                            if (input.is("input")) {
+                                                rowData[field] = oldValue;
+                                            }
+
+                                            input.val(oldValue);
+                                        }
+                                    });
+                            }
+                        }).off("blur").on("blur", function () {
+                            label.removeClass("hidden");
+
+                            input.addClass("hidden");
+                        }).off("keyup keydown").on("keyup keydown", function () {
+                            if (!isSelect) {
+                                input.css("width", calculateWidth(input));
+                            }
+                        });
+                    });
+                }
+            };
+        },
+
         integer: function () {
             return {
                 restrict: "A",

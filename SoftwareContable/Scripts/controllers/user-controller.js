@@ -1,12 +1,12 @@
 ﻿(function ($, angular) {
     "use strict";
 
-    var userController = angular.module("softwareContable", []);
+    var softwareContable = angular.module("softwareContable", []);
 
-    userController.directive("integer", angularDirectives.integer);
-    userController.directive("modalWindow", angularDirectives.modalWindow);
+    softwareContable.directive("integer", angularDirectives.integer);
+    softwareContable.directive("modalWindow", angularDirectives.modalWindow);
 
-    userController.controller("userController", ["$scope", "$compile", function ($scope, $compile) {
+    softwareContable.controller("userController", ["$scope", "$compile", function ($scope, $compile) {
         var ajax = new AjaxProvider();
         var userResults = {};
 

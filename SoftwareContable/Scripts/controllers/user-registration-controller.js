@@ -1,9 +1,9 @@
 ﻿(function ($, angular) {
     "use strict";
 
-    var userRegistrationController = angular.module("softwareContable", []);
+    var softwareContable = angular.module("softwareContable", []);
 
-    userRegistrationController.controller("userRegistrationController", ["$scope", "$compile", function ($scope, $compile) {
+    softwareContable.controller("userRegistrationController", ["$scope", "$compile", function ($scope, $compile) {
         var ajax = new AjaxProvider();
 
         var urls = {
