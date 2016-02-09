@@ -14,25 +14,25 @@
         </div>
     </div>
 
-    <form class="form-inline">
+    <form class="form-inline" ng-init="initUrls('@Url.Action("Catalogs", "Report")', '@Url.Action("Save", "Report")', '@Url.Action("Validate", "Report")')">
         <div class="container search-criteria">
             <div class="row">
-                <div class="col-md-offset-3 col-md-4">
+                <div class="col-md-offset-3 col-md-2">
                     <div class="form-group">
                         <h5 class="bold">RFC Cliente</h5>
-                        <input id="txtRfcCliente" type="text" class="form-control" placeholder="RFC Cliente" />
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <h5 class="bold">Raz&oacute;n Social</h5>
-                        <input type="text" class="form-control" readonly />
+                        <input id="txtRfcCliente" type="text" class="form-control" placeholder="RFC Cliente" ng-model="selectedClient.Rfc" />
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div class="form-group">
                         <h5>&nbsp;</h5>
-                        <button class="btn btn-info btn-block" title="Buscar Cliente"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-info btn-block" title="Buscar Cliente" data-toggle="modal" data-target="#searchClientModalWindow"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="col-md-offset-1 col-md-2">
+                    <div class="form-group">
+                        <h5 class="bold">Raz&oacute;n Social</h5>
+                        <input type="text" class="form-control" readonly="readonly" ng-model="selectedClient.CorporateName" />
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
                 <div class="col-md-offset-3 col-md-4">
                     <div class="form-group">
                         <h5>Fecha Factura</h5>
-                        <input id="txtFechaFactura" type="text" class="form-control" placeholder="Fecha Factura" datepicker />
+                        <input id="txtFechaFactura" type="text" class="form-control" placeholder="Fecha Factura" date-picker />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -60,14 +60,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <h5>Sistema Vendido</h5>
-                        <select class="form-control">
-                            <option value="1">Contabilidad</option>
-                            <option value="2">AdminPAQ</option>
-                            <option value="3">ContPAQ</option>
-                            <option value="4">Bancos</option>
-                            <option value="5">Facturaci&oacute;n Electr&oacute;nica</option>
-                            <option value="6">N&oacute;minas</option>
-                        </select>
+                        <select class="form-control" ng-options="item.Value for item in soldSystems track by item.Id" ng-model="newReport.SoldSystemId"></select>
                     </div>
                 </div>
             </div>
@@ -83,7 +76,7 @@
                 <div class="col-md-offset-3 col-md-4">
                     <div class="form-group">
                         <h5>Fecha Promesa</h5>
-                        <input id="txtFechaPromesa" type="text" class="form-control" placeholder="Fecha Promesa" datepicker />
+                        <input id="txtFechaPromesa" type="text" class="form-control" placeholder="Fecha Promesa" date-picker />
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -103,7 +96,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <h5>Fecha Activaci&oacute;n</h5>
-                        <input id="txtFechaActivacion" type="text" class="form-control" placeholder="Fecha Activaci&oacute;n" datepicker />
+                        <input id="txtFechaActivacion" type="text" class="form-control" placeholder="Fecha Activaci&oacute;n" date-picker />
                     </div>
                 </div>
             </div>
@@ -113,6 +106,55 @@
                 </div>
                 <div class="col-md-2">
                     <button class="btn btn-primary btn-lg btn-block">Crear</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="searchClientModalWindow" class="modal fade" tabindex="-1" role="dialog" modal-window>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header panel-primary">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h2 class="modal-title">Clientes</h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container clients-container">
+                            <div class="row margin-bottom-10">
+                                <div class="col-md-offset-1 col-md-4 text-center">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Buscar Cliente" ng-model="clientFilter" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-offset-1 col-md-4">
+                                    <table id="tblSearchClients" class="table table-striped table-condensed table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>RFC</td>
+                                                <td>Raz&oacute;n Social</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="client in clients | orderBy:Rfc | filter:clientFilter">
+                                                <td><a class="btn btn-link" data-dismiss="modal" ng-click="selectClient(client)">{{ client.Rfc }}</a>  </td>
+                                                <td>{{ client.CorporateName }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
                 </div>
             </div>
         </div>

@@ -15,6 +15,7 @@
         "~/Content/bootstrap.min.css",
         "~/Content/bootstrap-theme.min.css",
         "~/css/font-awesome.min.css",
+        "~/Content/datepicker.css",
         "~/Content/style.css",
         "~/Content/dark-blue.css",
         "~/Content/software-contable.css")
@@ -28,7 +29,7 @@
         }
     </style>
 </head>
-<body ng-app="softwareContable">
+<body ng-app="softwareContable" date-format="dd/mm/yyyy">
 
     <div class="wrapper">
         <div class="header">
@@ -140,7 +141,8 @@
 
     @Scripts.Render(
         "~/Scripts/jquery-2.2.0.min.js",
-        "~/Scripts/bootstrap.min.js")
+        "~/Scripts/bootstrap.min.js",
+        "~/Scripts/bootstrap-datepicker.js")
 
     @RenderSection("Scripts", false)
 </body>

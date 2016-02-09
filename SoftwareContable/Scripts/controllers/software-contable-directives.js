@@ -153,6 +153,22 @@
                     }
                 }
             };
+        },
+
+        datePicker: function () {
+            return {
+                restrict: "A",
+
+                link: function (scope, element, attrs) {
+                    element = $(element).addClass("datepicker");
+
+                    element.off().datepicker({
+                        format: $("body[date-format]").attr("date-format")
+                    }).on("keydown", function () {
+                        return false;
+                    });
+                }
+            };
         }
     };
 })(window.jQuery);

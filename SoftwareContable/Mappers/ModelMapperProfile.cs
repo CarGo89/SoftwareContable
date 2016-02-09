@@ -20,6 +20,9 @@ namespace SoftwareContable.Mappers
             Mapper.CreateMap<DataAccess.Entities.User, User>()
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => string.Empty));
 
+            Mapper.CreateMap<DataAccess.Entities.SoldSystem, OptionCatalog>()
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Name));
+
             Mapper.CreateMap<SoldSystem, DataAccess.Entities.SoldSystem>();
             Mapper.CreateMap<DataAccess.Entities.SoldSystem, SoldSystem>();
 

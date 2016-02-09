@@ -210,3 +210,20 @@ a.log-off {
 .bold {
     font-weight: bold;
 }
+
+.datepicker {
+    margin-top: 0;
+}
+
+.set-loading-panel {
+    display: none;
+}
+
+#tblSearchClients thead tr {
+    text-align: center;
+    font-weight: bold;
+}
+
+#tblSearchClients tbody td {
+    text-align: justify;
+}

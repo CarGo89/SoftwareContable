@@ -10,13 +10,16 @@ using SoftwareContable.Models;
 namespace SoftwareContable.Controllers
 {
     [Authorize]
-    public class ReportController : Controller
+    public class ReportController : SoftwareContableController<Report, DataAccess.Entities.Report>
     {
-        private readonly IRepository<DataAccess.Entities.Report> _reportRepository;
+        private readonly IRepository<DataAccess.Entities.SoldSystem> _soldSystemRepository;
+        private readonly IRepository<DataAccess.Entities.Client> _clientRepository;
 
         public ReportController()
         {
-            _reportRepository = FactoryRepository.Create<DataAccess.SoftwareContableDbContext, DataAccess.Entities.Report>();
+            _soldSystemRepository = FactoryRepository.Create<DataAccess.SoftwareContableDbContext, DataAccess.Entities.SoldSystem>();
+
+            _clientRepository = FactoryRepository.Create<DataAccess.SoftwareContableDbContext, DataAccess.Entities.Client>();
         }
 
         public ActionResult Visualize()
@@ -30,14 +33,17 @@ namespace SoftwareContable.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public async Task<ActionResult> Catalogs()
         {
-            var dbReports = await _reportRepository.GetAllAsync();
-            var reports = Mapper.Map<IEnumerable<Report>>(dbReports);
+            var dbSoldSystems = await _soldSystemRepository.GetAllAsync();
+            var soldSystems = Mapper.Map<IEnumerable<OptionCatalog>>(dbSoldSystems);
+            var dbClients = await _clientRepository.GetAllAsync();
+            var clients = Mapper.Map<IEnumerable<Client>>(dbClients);
 
             var jsonResult = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
             {
-                { "reports", reports }
+                { "clients", clients },
+                { "soldSystems", soldSystems }
             };
 
             return jsonResult.ToJsonResult();
@@ -45,7 +51,7 @@ namespace SoftwareContable.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            _reportRepository.Dispose();
+            _clientRepository.Dispose();
 
             base.Dispose(disposing);
         }
