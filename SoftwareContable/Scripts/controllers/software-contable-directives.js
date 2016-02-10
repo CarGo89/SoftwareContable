@@ -159,13 +159,31 @@
             return {
                 restrict: "A",
 
-                link: function (scope, element, attrs) {
+                require: "ngModel",
+
+                link: function (scope, element, attrs, ngModel) {
                     element = $(element).addClass("datepicker");
 
                     element.off().datepicker({
                         format: $("body[date-format]").attr("date-format")
                     }).on("keydown", function () {
                         return false;
+                    });
+
+                    ngModel.$render = function () {
+                        var dateValue = new Date(ngModel.$viewValue || "");
+
+                        if (dateValue.valueOf() > 0) {
+                            $element.datepicker("update", dateValue).datepicker("setValue", dateValue);
+                        }
+                    };
+
+                    element.datepicker().on("changeDate", function (event) {
+                        scope.$applyAsync(function () {
+                            var formattedDate = event.formatDate(event.date);
+
+                            ngModel.$setViewValue(formattedDate);
+                        });
                     });
                 }
             };

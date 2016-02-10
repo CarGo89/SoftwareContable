@@ -37,7 +37,7 @@ namespace SoftwareContable.DataAccess.Entities
         public string Lote { get; set; }
 
         [Column(TypeName = "VARCHAR"), MaxLength(255)]
-        public string Serial { get; set; }
+        public string InvoiceSerial { get; set; }
 
         public int NumberOfUsers { get; set; }
 

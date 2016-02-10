@@ -26,7 +26,10 @@ namespace SoftwareContable.Mappers
             Mapper.CreateMap<SoldSystem, DataAccess.Entities.SoldSystem>();
             Mapper.CreateMap<DataAccess.Entities.SoldSystem, SoldSystem>();
 
-            Mapper.CreateMap<Report, DataAccess.Entities.Report>();
+            Mapper.CreateMap<Report, DataAccess.Entities.Report>()
+                .ForMember(dest => dest.Client, opt => opt.MapFrom(src => (Client)null))
+                .ForMember(dest => dest.SoldSystem, opt => opt.MapFrom(src => (SoldSystem)null));
+
             Mapper.CreateMap<DataAccess.Entities.Report, Report>();
         }
     }

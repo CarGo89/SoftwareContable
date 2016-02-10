@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using AutoMapper;
@@ -39,10 +40,13 @@ namespace SoftwareContable.Controllers
             var soldSystems = Mapper.Map<IEnumerable<OptionCatalog>>(dbSoldSystems);
             var dbClients = await _clientRepository.GetAllAsync();
             var clients = Mapper.Map<IEnumerable<Client>>(dbClients);
+            var jsonClients = clients
+                .ToDictionary(key => key.Id.ToString(), StringComparer.InvariantCultureIgnoreCase);
 
             var jsonResult = new Dictionary<string, object>(StringComparer.InvariantCultureIgnoreCase)
             {
                 { "clients", clients },
+                { "clientsById", jsonClients },
                 { "soldSystems", soldSystems }
             };
 
