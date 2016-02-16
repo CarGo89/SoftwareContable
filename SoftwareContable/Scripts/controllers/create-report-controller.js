@@ -37,33 +37,37 @@
                     $compile(clientResults)($scope);
                 }
 
-                $scope.$applyAsync(function () {
-                    window.ajaxLoadingPanel.css("display", "none");
-                });
+                $scope.$apply();
             });
         };
 
-        var createReport = function () {
+        var clearMessages = function () {
             $scope.validationMessages = [];
+            $scope.successMessages = [];
+
+            $scope.showErrors = false;
+            $scope.showMessages = false;
+        };
+
+        var createReport = function () {
+            clearMessages();
 
             $scope.newReport.ClientId = $scope.selectedClient.Id;
             $scope.newReport.SoldSystemId = $scope.selectedSoldSystem.Id;
 
             ajax.post(urls.save, $scope.newReport, function (data, textStatus, jqXhr) {
-                if (data === true) {
-                    ajax.post(urls.save, $scope.newReport, function (data, textStatus, jqXhr) {
-                        setSuccessMessage("Reporte creado correctamente.");
+                if (data.Id > 0) {
+                    $scope.successMessages = ["Reporte creado correctamente."];
 
-                        $scope.newClientModal.modal("hide");
-
-                        $scope.get();
-                    });
+                    $scope.showMessages = true;
                 }
                 else if (data.length > 0) {
                     $scope.validationMessages = data;
 
-                    $scope.$apply();
+                    $scope.showErrors = true;
                 }
+
+                $scope.$applyAsync();
             });
         };
 
@@ -108,6 +112,11 @@
             getCatalogs();
         });
 
+        $scope.showErrors = false;
+        $scope.showMessages = false;
+        $scope.validationMessages = [];
+        $scope.successMessages = [];
+
         $scope.newReport = {};
         $scope.selectedClient = {};
         $scope.selectedSoldSystem = {};
@@ -126,5 +135,6 @@
         $scope.initUrls = initUrls;
         $scope.selectClient = selectClient;
         $scope.create = createReport;
+        $scope.clearMessages = clearMessages;
     }]);
 })(window.jQuery, window.angular);

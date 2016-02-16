@@ -3,6 +3,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@* loadingPanel set to active just when page is loaded *@
+<style>
+    #loadingPanel {
+        display: table;
+    }
+</style>
+
 @section Styles
 {
     @Styles.Render(

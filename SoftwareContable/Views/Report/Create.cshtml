@@ -3,13 +3,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@* loadingPanel set to active just when page is loaded *@
+<style>
+    #loadingPanel {
+        display: table;
+    }
+</style>
+
 @section Styles
 {
     @Styles.Render(
         "~/Scripts/datatable/css/dataTables.bootstrap.css",
         "~/Scripts/datatable/responsive/css/dataTables.responsive.css")
 }
-
 <div ng-controller="createReportController">
     <div class="breadcrumbs-v3">
         <div class="container">
@@ -22,6 +28,28 @@
     </div>
 
     <form class="form-inline" ng-init="initUrls('@Url.Action("Catalogs", "Report")', '@Url.Action("Save", "Report")', '@Url.Action("Validate", "Report")')">
+        <div class="container table-results-container">
+            <div class="row text-center">
+                <div class="col-md-offset-3 col-md-3 text-justify alert alert-danger alert-validation-messages" ng-class="{'hidden': !showErrors}" ng-click="clearMessages()">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <ul>
+                        <li class="text-danger" ng-repeat="validationMessage in validationMessages">{{ validationMessage }}</li>
+                    </ul>
+                </div>
+
+                <div class="col-md-offset-3 col-md-3 text-justify alert alert-success alert-validation-messages" ng-class="{'hidden': !showMessages}" ng-click="clearMessages()">
+                    <button type="button" class="close" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <ul class="list-unstyled text-center">
+                        <li class="text-success" ng-repeat="successMessage in successMessages">{{ successMessage }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         <div class="container search-criteria">
             <div class="row">
                 <div class="col-md-offset-3 col-md-2">

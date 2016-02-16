@@ -89,14 +89,22 @@
                     $compile(clientResults)($scope);
                 }
 
-                $scope.$applyAsync(function () {
-                    window.ajaxLoadingPanel.css("display", "none");
-                });
+                $scope.$applyAsync();
             });
         };
 
-        var saveClients = function () {
+        var clearMessages = function () {
+            $scope.showErrors = false;
+
+            $scope.showUpdateErrors = false;
+
             $scope.validationMessages = [];
+
+            $scope.updateValidationMessages = [];
+        };
+
+        var saveClients = function () {
+            clearMessages();
 
             ajax.post(urls.validate, $scope.newClient, function (data, textStatus, jqXhr) {
                 if (data === true) {
@@ -111,13 +119,15 @@
                 else if (data.length > 0) {
                     $scope.validationMessages = data;
 
-                    $scope.$apply();
+                    $scope.showErrors = true;
+
+                    $scope.$applyAsync();
                 }
             });
         };
 
         var updateClient = function (field, oldValue, newValue, rowData, onValidation) {
-            $scope.updateValidationMessages = [];
+            clearMessages();
 
             ajax.post(urls.validate, rowData, function (data, textStatus, jqXHR) {
                 onValidation.call(this, data);
@@ -130,7 +140,9 @@
                 else if (data.length > 0) {
                     $scope.updateValidationMessages = data;
 
-                    $scope.$apply();
+                    $scope.showUpdateErrors = true;
+
+                    $scope.$applyAsync();
                 }
             });
         };
@@ -138,10 +150,11 @@
         var onNewClientHidden = function (event) {
             $scope.newClient = {};
 
-            $scope.validationMessages = [];
-
-            $scope.$apply();
+            clearMessages();
         };
+
+        $scope.showErrors = false;
+        $scope.showUpdateErrors = false;
 
         $scope.clients = [];
         $scope.newClient = {};
@@ -154,5 +167,6 @@
         $scope.update = updateClient;
         $scope.save = saveClients;
         $scope.onNewClientHidden = onNewClientHidden;
+        $scope.clearMessages = clearMessages;
     }]);
 })(window.jQuery, window.angular);

@@ -80,9 +80,7 @@
                 $compile(reportResults)($scope);
             }
 
-            $scope.$applyAsync(function () {
-                window.ajaxLoadingPanel.css("display", "none");
-            });
+            $scope.$apply();
         }
 
         var getReports = function () {

@@ -21,9 +21,10 @@
 
         var clearMessages = function () {
             $scope.errorMessages = [];
-            $scope.successMessages= [];
+            $scope.successMessages = [];
 
             $scope.showErrors = false;
+            $scope.showMessages = false;
         };
 
         var login = function () {
@@ -31,9 +32,9 @@
 
             ajax.post(urls.registerUrl, $scope.loginUser, function (data, textStatus, jqXhr) {
                 if (data.returnUrl && data.returnUrl.length > 0) {
-                    window.ajaxLoadingPanel.css("display", "table !important");
-
                     window.location.href = data.returnUrl;
+
+                    window.ajaxLoadingPanel.addClass("active");
                 }
                 else {
                     if (typeof data === "string") {
@@ -57,7 +58,10 @@
                 if (data.Id > 0) {
                     var successMessage = data.UserName.concat(", gracias por registrarte!");
 
+                    $scope.showMessages = true;
+
                     $scope.successMessages = [successMessage];
+
                     $scope.newUser = {};
                 }
                 else {
@@ -79,7 +83,9 @@
         $scope.loginUser = {};
         $scope.errorMessages = [];
         $scope.successMessages = [];
+
         $scope.showErrors = false;
+        $scope.showMessages = false;
 
         $scope.initRegistrationUrls = initRegistrationUrls;
         $scope.initLoginUrls = initLoginUrls;

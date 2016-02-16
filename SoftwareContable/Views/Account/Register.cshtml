@@ -10,25 +10,24 @@
     <meta name="viewport" content="width=device-width" />
     <title>Registro de Usuario</title>
 
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <link href="~/Content/software-contable.css" rel="stylesheet" />
-
     @* loadingPanel set to active just when page is loaded *@
     <style>
         #loadingPanel {
             display: table;
         }
     </style>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/software-contable.css" rel="stylesheet" />
 </head>
 <body ng-app="softwareContable">
     <div ng-controller="userRegistrationController" class="container" ng-init="initRegistrationUrls('@Url.Action("RegisterUser", "Account")')">
         <div class="col-md-offset-1 col-md-10">
             <div class="alert-messages-section">
                 <div class="row">
-
-                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-danger alert-validation-messages" ng-click="errorMessages = []" ng-class="{'hidden': errorMessages.length === 0}">
+                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-danger alert-validation-messages no-master" ng-class="{'hidden': !showErrors}" ng-click="clearMessages()">
                         <button type="button" class="close" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -37,7 +36,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-success alert-validation-messages" ng-click="successMessages = []" ng-class="{'hidden': successMessages.length === 0}">
+                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-success alert-validation-messages no-master" ng-class="{'hidden': !showMessages}" ng-click="clearMessages()">
                         <button type="button" class="close" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -51,7 +50,7 @@
             <div class="account-wall text-center">
                 <div id="loadingPanel">
                     <div>
-                        Page Loading...<br />
+                        Cargando...<br />
                         <i class="fa fa-5x fa-circle-o-notch fa-spin"></i>
                     </div>
                 </div>
@@ -85,10 +84,10 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-5 col-md-1">
-                            <a href='@Url.Action("Login", "Account")' class="btn btn-link">Cancelar</a>
+                            <a href='@Url.Action("Login", "Account")' class="btn btn-link set-loading-panel">Cancelar</a>
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-primary btn-lg btn-block" title="Registrar Nuevo Usuario" ng-click="register()">Registrar</button>
+                            <button class="btn btn-primary btn-lg btn-block  set-loading-panel" title="Registrar Nuevo Usuario" ng-click="register()">Registrar</button>
                         </div>
                     </div>
                 </form>

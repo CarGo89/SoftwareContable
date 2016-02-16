@@ -40,7 +40,7 @@
                             <a>
                                 <i class="fa fa-user fa-1x"></i>@LoggedInUserInfo.User.UserName
                             </a>
-                            <a class="log-off" href='@Url.Action("LogOff", "Account")'>
+                            <a class="log-off set-loading-panel" href='@Url.Action("LogOff", "Account")'>
                                 <i class="fa fa-power-off fa-1x"></i>Cerrar Sesi&oacute;n
                             </a>
                         </li>
@@ -89,7 +89,7 @@
 
         <div id="loadingPanel">
             <div>
-                Page Loading...<br />
+                Cargando...<br />
                 <i class="fa fa-5x fa-circle-o-notch fa-spin"></i>
             </div>
         </div>
@@ -142,7 +142,8 @@
     @Scripts.Render(
         "~/Scripts/jquery-2.2.0.min.js",
         "~/Scripts/bootstrap.min.js",
-        "~/Scripts/bootstrap-datepicker.js")
+        "~/Scripts/bootstrap-datepicker.js",
+        "~/Scripts/utilities/software-contable.js")
 
     @RenderSection("Scripts", false)
 </body>

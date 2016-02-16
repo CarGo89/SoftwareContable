@@ -101,11 +101,14 @@
     margin-top: 10px;
 }
 
-div.alert-messages-section div.alert, .alert-validation-messages {
+.alert-validation-messages {
     z-index: 1000;
     position: fixed;
-    margin-top: 2%;
 }
+
+    .alert-validation-messages.no-master {
+        margin-top: 2%;
+    }
 
 div.copyright {
     margin-top: 7%;
