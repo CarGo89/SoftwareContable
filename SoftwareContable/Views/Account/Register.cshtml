@@ -28,22 +28,20 @@
             <div class="alert-messages-section">
                 <div class="row">
 
-                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-danger alert-validation-messages" ng-hide="!errorMessages || errorMessages.length === 0">
-                        <button type="button" class="close" aria-label="Close" ng-click="errorMessages = []">
+                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-danger alert-validation-messages" ng-click="errorMessages = []" ng-class="{'hidden': errorMessages.length === 0}">
+                        <button type="button" class="close" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                        <h4 class="text-center">Error!</h4>
                         <ul>
                             <li class="text-danger" ng-repeat="errorMessage in errorMessages">{{ errorMessage }}</li>
                         </ul>
                     </div>
 
-                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-success alert-validation-messages" ng-hide="!successMessages || successMessages.length === 0">
-                        <button type="button" class="close" aria-label="Close" ng-click="successMessages = []">
+                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-success alert-validation-messages" ng-click="successMessages = []" ng-class="{'hidden': successMessages.length === 0}">
+                        <button type="button" class="close" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                        <h4 class="text-center">Confirmaci&oacute;n!</h4>
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled text-center">
                             <li class="text-success" ng-repeat="successMessage in successMessages">{{ successMessage }}</li>
                         </ul>
                     </div>

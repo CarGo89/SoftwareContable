@@ -12,16 +12,12 @@
 
         var urls = {
             get: "",
-            save: "",
-            update: "",
-            validate: ""
+            search: ""
         };
 
-        var initUrls = function (getUrl, saveUrl, updateUrl, validateUrl) {
+        var initUrls = function (getUrl, searchUrl) {
             urls.get = getUrl;
-            urls.save = saveUrl;
-            urls.update = updateUrl;
-            urls.validate = validateUrl;
+            urls.search = searchUrl;
         };
 
         var columns = [
@@ -29,7 +25,7 @@
             { data: "Client.CorporateName", width: "auto" },
             { data: "CreationDate", width: "auto" },
             { data: "InvoiceDate", width: "auto" },
-            { data: "InvoiceId", width: "auto" }
+            { data: "InvoiceSerial", width: "auto" }
         ];
 
         angular.element(document).ready(function () {
@@ -47,11 +43,47 @@
                     infoEmpty: "Mostrando 0 a 0 de 0 Reportes",
                     infoFiltered: "(filtro de _MAX_ total Reportes)"
                 },
-                columns: columns
+                columns: columns,
+                columnDefs: [
+                     {
+                         targets: [0, 4],
+                         createdCell: function (td, cellData, rowData, row, col) {
+                             $(td).addClass("text-center");
+                         }
+                     },
+                   {
+                       targets: [2, 3],
+                       createdCell: function (td, cellData, rowData, row, col) {
+                           var dateValue = eval(("new ").concat(cellData).replace(/\//g, ""));
+                           var formattedDate = "";
+
+                           if (dateValue.valueOf() > 0) {
+                               formattedDate = formatDate(dateValue);
+                           }
+
+                           $(td).addClass("text-center").text(formattedDate);
+                       }
+                   }
+                ]
             });
 
             $scope.get();
         });
+
+        var bindReports = function () {
+            reportResults.fnClearTable();
+
+            if ($scope.reports.length > 0) {
+                reportResults.fnAddData($scope.reports);
+                reportResults.fnAdjustColumnSizing();
+
+                $compile(reportResults)($scope);
+            }
+
+            $scope.$applyAsync(function () {
+                window.ajaxLoadingPanel.css("display", "none");
+            });
+        }
 
         var getReports = function () {
             var getUrl = urls.get;
@@ -59,22 +91,33 @@
             ajax.get(getUrl, false, function (data, textStatus, jqXhr) {
                 $scope.reports = data.reports;
 
-                reportResults.fnClearTable();
-
-                if ($scope.reports.length > 0) {
-                    reportResults.fnAddData($scope.reports);
-                    reportResults.fnAdjustColumnSizing();
-
-                    $compile(reportResults)($scope);
-                }
-
-                $scope.$applyAsync(function () {
-                    window.ajaxLoadingPanel.css("display", "none");
-                });
+                bindReports();
             });
         };
 
+        var searchReports = function () {
+            var searchUrl = urls.search;
+            var initialFolio = ($scope.initialFolio > 0 ? $scope.initialFolio : 0);
+            var finalFolio = ($scope.finalFolio > 0 ? $scope.finalFolio : 0);
+
+            if (!(initialFolio + finalFolio > 0)) {
+                return;
+            }
+
+            searchUrl = searchUrl.concat("/").concat(initialFolio).concat("/").concat(finalFolio);
+
+            ajax.get(searchUrl, false, function (data, textStatus, jqXhr) {
+                $scope.reports = data.reports;
+
+                bindReports();
+            });
+        };
+
+        $scope.initialFolio = "";
+        $scope.finalFolio = "";
+
         $scope.initUrls = initUrls;
         $scope.get = getReports;
+        $scope.search = searchReports;
     }]);
 })(window.jQuery, window.angular);

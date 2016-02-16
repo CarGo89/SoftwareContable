@@ -55,6 +55,7 @@ namespace SoftwareContable.Controllers
 
             userToAuthorize.IsAuthorized = true;
             userToAuthorize.AuthorizedByUserId = LoggedInUserInfo.User.Id;
+            userToAuthorize.AuthorizationDate = DateTime.Now;
 
             await ModelRepository.UpdateAsync(userToAuthorize).ConfigureAwait(false);
 

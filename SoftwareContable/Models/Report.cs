@@ -20,6 +20,8 @@ namespace SoftwareContable.Models
         [Range(1, int.MaxValue, ErrorMessage = "Importe Factura es requerido.")]
         public decimal InvoiceTotal { get; set; }
 
+        public DateTime? CreationDate { get; set; }
+
         [Range(1, int.MaxValue, ErrorMessage = "Sistema Vendido es requerido.")]
         public int SoldSystemId { get; set; }
 

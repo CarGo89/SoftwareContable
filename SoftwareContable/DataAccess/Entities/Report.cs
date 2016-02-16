@@ -14,33 +14,39 @@ namespace SoftwareContable.DataAccess.Entities
 
         public virtual Client Client { get; set; }
 
-        public DateTime? CreationDate { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime CreationDate { get; set; }
 
         [Required]
-        public int InvoiceId { get; set; }
-
         public DateTime? InvoiceDate { get; set; }
 
-        public decimal InvoiceTotal { get; set; }
+        [Required]
+        public decimal? InvoiceTotal { get; set; }
+
+        [Required]
+        [Column(TypeName = "VARCHAR"), MaxLength(255)]
+        public string InvoiceSerial { get; set; }
 
         [Required]
         public int SoldSystemId { get; set; }
 
         public virtual SoldSystem SoldSystem { get; set; }
 
+        [Required]
         [Column(TypeName = "VARCHAR"), MaxLength(8000)]
         public string Comments { get; set; }
 
-        public DateTime PromiseDate { get; set; }
+        [Required]
+        public DateTime? PromiseDate { get; set; }
 
+        [Required]
         [Column(TypeName = "VARCHAR"), MaxLength(255)]
         public string Lote { get; set; }
 
-        [Column(TypeName = "VARCHAR"), MaxLength(255)]
-        public string InvoiceSerial { get; set; }
+        [Required]
+        public int? NumberOfUsers { get; set; }
 
-        public int NumberOfUsers { get; set; }
-
+        [Required]
         public DateTime? ActivatedDate { get; set; }
     }
 }

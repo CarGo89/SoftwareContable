@@ -21,25 +21,25 @@
         </div>
     </div>
 
-    <form class="form-inline voffset4" ng-init="initUrls('@Url.Action("Get", "Report")')">
+    <form class="form-inline voffset4" ng-init="initUrls('@Url.Action("Get", "Report")', '@Url.Action("Search", "Report")')">
         <div class="container search-criteria">
             <div class="row">
                 <div class="col-md-offset-3 col-md-3">
                     <div class="form-group">
                         <h5 class="bold">Folio Inicial</h5>
-                        <input id="txtFolioInicial" type="text" class="form-control" placeholder="Folio Inicial" />
+                        <input id="txtFolioInicial" type="text" class="form-control" placeholder="Folio Inicial" ng-model="initialFolio" />
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <h5 class="bold">Folio Final</h5>
-                        <input id="txtFolioFinal" type="text" class="form-control" placeholder="Folio Final" />
+                        <input id="txtFolioFinal" type="text" class="form-control" placeholder="Folio Final" ng-model="finalFolio" />
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div class="form-group">
                         <h5>&nbsp;</h5>
-                        <button class="btn btn-info btn-large btn-block">Buscar</button>
+                        <button class="btn btn-info btn-large btn-block" ng-click="search()">Buscar</button>
                     </div>
                 </div>
             </div>

@@ -12,17 +12,29 @@
     <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/software-contable.css" rel="stylesheet" />
+
+    @* loadingPanel set to active just when page is loaded *@
+    <style>
+        #loadingPanel {
+            display: table;
+        }
+    </style>
 </head>
 <body ng-app="softwareContable">
+    <div id="loadingPanel">
+        <div>
+            Page Loading...<br />
+            <i class="fa fa-5x fa-circle-o-notch fa-spin"></i>
+        </div>
+    </div>
+
     <div ng-controller="userRegistrationController" class="container" ng-init="initLoginUrls('@Url.Action("Login", "Account")')">
         <div class="alert-messages-section">
             <div class="row">
-
-                <div class="col-md-offset-3 col-md-4 text-justify alert alert-danger alert-validation-messages" ng-hide="!errorMessages || errorMessages.length === 0">
-                    <button type="button" class="close" aria-label="Close" ng-click="errorMessages = []">
+                <div class="col-md-offset-3 col-md-3 text-justify alert alert-danger alert-validation-messages" ng-class="{'hidden': !showErrors}" ng-click="clearErrorMessages()">
+                    <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="text-center">Error!</h4>
                     <ul class="text-center list-unstyled">
                         <li class="text-danger" ng-repeat="errorMessage in errorMessages">{{ errorMessage }}</li>
                     </ul>
@@ -40,20 +52,20 @@
                     <input type="text" class="form-control" placeholder="Usuario" ng-model="loginUser.UserName" />
                     <input type="password" class="form-control" placeholder="Contraseña" ng-model="loginUser.Password" />
 
-                    <button class="btn btn-primary btn-lg btn-block" ng-click="login()">
+                    <button class="btn btn-primary btn-lg btn-block set-loading-panel" ng-click="login()">
                         Iniciar Sesi&oacute;n
                     </button>
                 </form>
             </div>
-            <a href='@Url.Action("Register", "Account")' class="text-center new-account">Registrarse</a>
+            <a href='@Url.Action("Register", "Account")' class="text-center new-account set-loading-panel">Registrarse</a>
         </div>
     </div>
 
     @Scripts.Render(
-        "~/Scripts/jquery-2.2.0.min.js",
-        "~/Scripts/bootstrap.min.js",
-        "~/Scripts/angular.js",
-        "~/Scripts/utilities/software-contable.js",
-        "~/Scripts/controllers/user-registration-controller.js")
+    "~/Scripts/jquery-2.2.0.min.js",
+    "~/Scripts/bootstrap.min.js",
+    "~/Scripts/angular.js",
+    "~/Scripts/utilities/software-contable.js",
+    "~/Scripts/controllers/user-registration-controller.js")
 </body>
 </html>

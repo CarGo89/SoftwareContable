@@ -95,6 +95,24 @@ namespace SoftwareContable.Utilities
             get;
         }
 
+        /// <summary>
+        /// Gets the value of the NewReportTemplateFilePath setting.
+        /// </summary>
+        public string NewReportTemplateFilePath
+        {
+            private set;
+            get;
+        }
+
+        /// <summary>
+        /// Gets the value of the NewReportSubject setting.
+        /// </summary>
+        public string NewReportSubject
+        {
+            private set;
+            get;
+        }
+
         #endregion Properties
 
         #region Constructors
@@ -111,6 +129,8 @@ namespace SoftwareContable.Utilities
             SmtpPassword = GetValue<string>("SMTPPassword");
             NewUserTemplateFilePath = GetValue<string>("NewUserTemplateFilePath");
             NewUserAuthorizationSubject = GetValue<string>("NewUserAuthorizationSubject");
+            NewReportTemplateFilePath = GetValue<string>("NewReportTemplateFilePath");
+            NewReportSubject = GetValue<string>("NewReportSubject");
         }
 
         #endregion Constructors

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Filters;
 using AutoMapper;
 using Dpr.Core.DataAccess;
+using Dpr.Core.Logging;
 using SoftwareContable.DataAccess;
 using SoftwareContable.DataAccess.Entities;
 using SoftwareContable.Extensions;
@@ -22,6 +23,8 @@ namespace SoftwareContable.Controllers
         #region Fields
 
         protected readonly IRepository<TData> ModelRepository;
+
+        protected readonly ILogger _logger;
 
         protected readonly string ModelDescription;
 
@@ -58,6 +61,8 @@ namespace SoftwareContable.Controllers
             var tModel = typeof(TModel);
 
             ModelRepository = FactoryRepository.Create<SoftwareContableDbContext, TData>();
+
+            _logger = new Logger();
 
             if (!ModelDescriptionsByType.TryGetValue(tModel, out ModelDescription))
             {
@@ -143,6 +148,13 @@ namespace SoftwareContable.Controllers
             }
 
             base.OnAuthentication(filterContext);
+        }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            _logger.Error(filterContext.Exception);
+
+            base.OnException(filterContext);
         }
 
         protected IEnumerable<string> GetValidationMessages()

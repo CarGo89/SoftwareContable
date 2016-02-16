@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoftwareContable.DataAccess.Entities
@@ -31,5 +32,7 @@ namespace SoftwareContable.DataAccess.Entities
         public int? AuthorizedByUserId { get; set; }
 
         public virtual User AuthorizedByUser { get; set; }
+
+        public DateTime? AuthorizationDate { get; set; }
     }
 }
