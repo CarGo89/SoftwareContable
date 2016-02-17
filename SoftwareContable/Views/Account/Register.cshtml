@@ -27,22 +27,36 @@
         <div class="col-md-offset-1 col-md-10">
             <div class="alert-messages-section">
                 <div class="row">
-                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-danger alert-validation-messages no-master" ng-class="{'hidden': !showErrors}" ng-click="clearMessages()">
+                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-danger alert-validation-messages hidden no-master" ng-class="{'hidden': !showErrors}" ng-click="clearMessages()">
                         <button type="button" class="close" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                        <ul>
-                            <li class="text-danger" ng-repeat="errorMessage in errorMessages">{{ errorMessage }}</li>
-                        </ul>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-md-10">
+                                <ul>
+                                    <li class="text-danger" ng-repeat="errorMessage in errorMessages">{{ errorMessage }}</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-success alert-validation-messages no-master" ng-class="{'hidden': !showMessages}" ng-click="clearMessages()">
+                    <div class="col-md-offset-2 col-md-4 text-justify alert alert-success alert-validation-messages hidden no-master" ng-class="{'hidden': !showMessages}" ng-click="clearMessages()">
                         <button type="button" class="close" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
-                        <ul class="list-unstyled text-center">
-                            <li class="text-success" ng-repeat="successMessage in successMessages">{{ successMessage }}</li>
-                        </ul>
+                        <div class="row">
+                            <div class="col-md-1">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            </div>
+                            <div class="col-md-10">
+                                <ul class="list-unstyled text-center">
+                                    <li class="text-success" ng-repeat="successMessage in successMessages">{{ successMessage }}</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

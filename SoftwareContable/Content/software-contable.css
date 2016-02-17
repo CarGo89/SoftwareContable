@@ -227,3 +227,7 @@ a.log-off {
 #tblSearchClients tbody td {
     text-align: justify;
 }
+
+.glyphicon.glyphicon-ok-sign, .glyphicon.glyphicon-exclamation-sign {
+    font-size: 200%;
+}

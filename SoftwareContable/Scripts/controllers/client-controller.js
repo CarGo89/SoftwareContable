@@ -49,8 +49,22 @@
                 },
                 columns: columns,
                 columnDefs: [
+                    {
+                        targets: [2],
+                        createdCell: function (td, cellData, rowData, row, col) {
+                            var field = columns[col].data;
+
+                            cellData = (cellData || "");
+
+                            $(td).text("")
+                                .data("rowData", rowData)
+                                .append(("<span class='inline-edit-label' inline-edit-field=").concat(field).concat(" on-inline-edited='update'>").concat(cellData).concat("</span>"))
+                                .append(("<input type='text' class='form-control hidden inline-edit-input' integer value=").concat(cellData).concat(" />"))
+                                .attr("inline-edit", "");
+                        }
+                    },
                    {
-                       targets: [0, 1, 2, 3],
+                       targets: [0, 1, 3],
                        createdCell: function (td, cellData, rowData, row, col) {
                            var field = columns[col].data;
                            var integerInput = "";
@@ -64,7 +78,7 @@
                            $(td).text("")
                                .data("rowData", rowData)
                                .append(("<span class='inline-edit-label' inline-edit-field=").concat(field).concat(" on-inline-edited='update'>").concat(cellData).concat("</span>"))
-                               .append(("<input type='text'' class='form-control hidden inline-edit-input' ").concat(integerInput).concat(" value=").concat(cellData).concat(" />"))
+                               .append(("<input type='text' class='form-control hidden inline-edit-input' ").concat(integerInput).concat(" value=").concat(cellData).concat(" />"))
                                .attr("inline-edit", "");
                        }
                    }
@@ -98,52 +112,58 @@
 
             $scope.showUpdateErrors = false;
 
+            $scope.showSuccessMessages = false;
+
             $scope.validationMessages = [];
 
             $scope.updateValidationMessages = [];
+
+            $scope.successMessages = [];
         };
 
         var saveClients = function () {
             clearMessages();
 
-            ajax.post(urls.validate, $scope.newClient, function (data, textStatus, jqXhr) {
-                if (data === true) {
-                    ajax.post(urls.save, $scope.newClient, function (data, textStatus, jqXhr) {
-                        setSuccessMessage("Cliente guardado correctamente.");
+            ajax.post(urls.save, $scope.newClient, function (data, textStatus, jqXhr) {
+                if (data.Id > 0) {
+                    $scope.successMessages = ["Cliente guardado correctamente."];
 
-                        $scope.newClientModal.modal("hide");
+                    $scope.showSuccessMessages = true;
 
-                        $scope.get();
-                    });
+                    $scope.newClientModal.modal("hide");
+
+                    $scope.get();
                 }
                 else if (data.length > 0) {
                     $scope.validationMessages = data;
 
                     $scope.showErrors = true;
-
-                    $scope.$applyAsync();
                 }
+
+                $scope.$applyAsync();
             });
         };
 
         var updateClient = function (field, oldValue, newValue, rowData, onValidation) {
             clearMessages();
 
-            ajax.post(urls.validate, rowData, function (data, textStatus, jqXHR) {
-                onValidation.call(this, data);
+            ajax.put(urls.update, rowData, function (data, textStatus, jqXHR) {
+                var wasUpdated = (data.Id > 0);
 
-                if (data === true) {
-                    ajax.put(urls.update, rowData, function (data, textStatus, jqXHR) {
-                        setSuccessMessage("Cliente actualizado correctamente.");
-                    });
+                onValidation.call(this, wasUpdated);
+
+                if (wasUpdated) {
+                    $scope.successMessages = ["Cliente actualizado correctamente."];
+
+                    $scope.showSuccessMessages = true;
                 }
                 else if (data.length > 0) {
                     $scope.updateValidationMessages = data;
 
                     $scope.showUpdateErrors = true;
-
-                    $scope.$applyAsync();
                 }
+
+                $scope.$applyAsync();
             });
         };
 
@@ -155,11 +175,13 @@
 
         $scope.showErrors = false;
         $scope.showUpdateErrors = false;
+        $scope.showSuccessMessages = false;
 
-        $scope.clients = [];
-        $scope.newClient = {};
         $scope.validationMessages = [];
         $scope.updateValidationMessages = [];
+        $scope.successMessages = [];
+        $scope.clients = [];
+        $scope.newClient = {};
         $scope.newClientModal = {};
 
         $scope.initUrls = initUrls;
