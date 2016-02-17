@@ -111,11 +111,22 @@
             });
         };
 
+        var clearFilter = function () {
+            if ($scope.initialFolio && $scope.initialFolio.length > 0 || $scope.finalFolio && $scope.finalFolio.length > 0) {
+                $scope.initialFolio = "";
+                $scope.finalFolio = "";
+
+                getReports();
+            }
+        };
+
+        $scope.reports = [];
         $scope.initialFolio = "";
         $scope.finalFolio = "";
 
         $scope.initUrls = initUrls;
         $scope.get = getReports;
         $scope.search = searchReports;
+        $scope.clearFilter = clearFilter;
     }]);
 })(window.jQuery, window.angular);
