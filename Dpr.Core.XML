@@ -1,0 +1,650 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Dpr.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Dpr.Core.DataAccess.BaseRepository`2">
+            <summary>
+            Provides predefined behavior to perform CRUD operations against a TModel using its corresponding <see cref="F:Dpr.Core.DataAccess.BaseRepository`2.Context"/> database.
+            </summary>
+            <typeparam name="TContext">The <see cref="F:Dpr.Core.DataAccess.BaseRepository`2.Context"/> representing the database.</typeparam>
+            <typeparam name="TModel">The TModel stored in the <see cref="F:Dpr.Core.DataAccess.BaseRepository`2.Context"/>.</typeparam>
+        </member>
+        <member name="T:Dpr.Core.DataAccess.IRepository`1">
+            <summary>
+            Provides abstraction to perform CRUD operations against a TModel stored in the database.
+            </summary>
+            <typeparam name="TModel">The type of the model to work with.</typeparam>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.SearchAsync``1(System.String)">
+            <summary>
+            Searchs for TResult items based on a <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="TResult">The type of the items to search for.</typeparam>
+            <param name="searchString">The word matching the TResult items.</param>
+            <returns>The TResult items as result.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.GetAllAsync">
+            <summary>
+            Gets all of the TModel items stored in the database.
+            </summary>
+            <returns>The TModel items.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.GetAllAsync(System.Predicate{`0})">
+            <summary>
+            Gets all of the TModel items stored in the database matching a <see cref="T:System.Predicate`1"/>.
+            </summary>
+            <param name="filter">The <see cref="T:System.Predicate`1"/> matching the TModel items.</param>
+            <returns>The TModel items.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.SingleAsync(System.Predicate{`0})">
+            <summary>
+            Gets one single TModel item stored in the database matching a <see cref="T:System.Predicate`1"/>.
+            </summary>
+            <param name="filter">The <see cref="T:System.Predicate`1"/> matching the TModel item.</param>
+            <returns>The TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.AddAsync(`0)">
+            <summary>
+            Adds a new TModel item to the database.
+            </summary>
+            <param name="entity">The new TModel item.</param>
+            <returns>The saved TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.AddAsync(`0[])">
+            <summary>
+            Provides predefined behavior to add a new TModel item.
+            </summary>
+            <param name="entities">The new collection of TModel item.</param>
+            <returns>The saved TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.UpdateAsync(`0)">
+            <summary>
+            Updates an existing TModel item stored in the database.
+            </summary>
+            <param name="entity">The existing TModel item.</param>
+            <returns>The updated TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.UpdateAsync(`0[])">
+            <summary>
+            Provides predefined behavior to update an existing collection of TModel.
+            </summary>
+            <param name="entities">The existing collection of TModel.</param>
+            <returns>The updated TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.DeleteAsync(`0)">
+            <summary>
+            Deletes an existing TModel item stored in the database.
+            </summary>
+            <param name="entity">The existing TModel item.</param>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.Search``1(System.String)">
+            <summary>
+            Searchs for TResult items based on a <see cref="T:System.String"/>.
+            </summary>
+            <typeparam name="TResult">The type of the items to search for.</typeparam>
+            <param name="searchString">The word matching the TResult items.</param>
+            <returns>The TResult items as result.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.GetAll">
+            <summary>
+            Gets all of the TModel items stored in the database.
+            </summary>
+            <returns>The TModel items.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.GetAll(System.Predicate{`0})">
+            <summary>
+            Gets all of the TModel items stored in the database matching a <see cref="T:System.Predicate`1"/>.
+            </summary>
+            <param name="filter">The <see cref="T:System.Predicate`1"/> matching the TModel items.</param>
+            <returns>The TModel items.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.Single(System.Predicate{`0})">
+            <summary>
+            Gets one single TModel item stored in the database matching a <see cref="T:System.Predicate`1"/>.
+            </summary>
+            <param name="filter">The <see cref="T:System.Predicate`1"/> matching the TModel item.</param>
+            <returns>The TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.Add(`0)">
+            <summary>
+            Adds a new TModel item to the database.
+            </summary>
+            <param name="entity">The new TModel item.</param>
+            <returns>The saved TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.Add(`0[])">
+            <summary>
+            Provides predefined behavior to add a new TModel item.
+            </summary>
+            <param name="entities">The new collection of TModel item.</param>
+            <returns>The saved TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.Update(`0)">
+            <summary>
+            Updates an existing TModel item stored in the database.
+            </summary>
+            <param name="entity">The existing TModel item.</param>
+            <returns>The updated TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.Update(`0[])">
+            <summary>
+            Provides predefined behavior to update an existing collection of TModel.
+            </summary>
+            <param name="entities">The existing collection of TModel.</param>
+            <returns>The updated TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.IRepository`1.Delete(`0)">
+            <summary>
+            Deletes an existing TModel item stored in the database.
+            </summary>
+            <param name="entity">The existing TModel item.</param>
+        </member>
+        <member name="F:Dpr.Core.DataAccess.BaseRepository`2.Context">
+            <summary>
+            Stores the instance of the TContext.
+            </summary>
+        </member>
+        <member name="F:Dpr.Core.DataAccess.BaseRepository`2.Entities">
+            <summary>
+            Stores the instance of the TModel items.
+            </summary>
+        </member>
+        <member name="F:Dpr.Core.DataAccess.BaseRepository`2._disposed">
+            <summary>
+            Detects redundant calls to <see cref="M:Dpr.Core.DataAccess.BaseRepository`2.Dispose(System.Boolean)"/>.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.#ctor">
+            <summary>
+            Initializes a new instance of the inherited class of <see cref="T:Dpr.Core.DataAccess.BaseRepository`2"/>
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the inherited class of <see cref="T:Dpr.Core.DataAccess.BaseRepository`2"/> by injecting the context.
+            </summary>
+            <param name="dbContext">The context representing the database.</param>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.SearchAsync``1(System.String)">
+            <summary>
+            Provides predefined behavior to search for TResult items.
+            </summary>
+            <typeparam name="TResult">The type of the items.</typeparam>
+            <param name="searchString">The word matching the TResult items.</param>
+            <returns>The TResult items matching the word.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.GetAllAsync">
+            <summary>
+            Provides predefined behavior to get all of the TModel items.
+            </summary>
+            <returns>The TModel items.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.GetAllAsync(System.Predicate{`1})">
+            <summary>
+            Provides predefined behavior to get of the TModel items matching a <see cref="T:System.Predicate`1"/>.
+            </summary>
+            <param name="filter">The <see cref="T:System.Predicate`1"/> matching the TModel items.</param>
+            <returns>The TModel items.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.SingleAsync(System.Predicate{`1})">
+            <summary>
+            Provides predefined behavior to get an TModel item matching a <see cref="T:System.Predicate`1"/>.
+            </summary>
+            <param name="filter">The <see cref="T:System.Predicate`1"/> matching the TModel item.</param>
+            <returns>The TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.AddAsync(`1)">
+            <summary>
+            Provides predefined behavior to add a new TModel item.
+            </summary>
+            <param name="entity">The new TModel item.</param>
+            <returns>The saved TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.AddAsync(`1[])">
+            <summary>
+            Provides predefined behavior to add a new TModel item.
+            </summary>
+            <param name="entities">The new collection of TModel item.</param>
+            <returns>The saved TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.UpdateAsync(`1)">
+            <summary>
+            Provides predefined behavior to update an existing TModel item.
+            </summary>
+            <param name="entity">The existing TModel item.</param>
+            <returns>The updated TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.UpdateAsync(`1[])">
+            <summary>
+            Provides predefined behavior to update an existing collection of TModel.
+            </summary>
+            <param name="entities">The existing collection of TModel.</param>
+            <returns>The updated TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.DeleteAsync(`1)">
+            <summary>
+            Provides predefined behavior to delete an existing TModel item.
+            </summary>
+            <param name="entity">The existing TModel item.</param>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.Dispose(System.Boolean)">
+            <summary>
+            Releases the resources used by the <see cref="F:Dpr.Core.DataAccess.BaseRepository`2.Context"/>.
+            </summary>
+            <param name="disposing">Indicates whether the current instance is being diposed.</param>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.Dispose">
+            <summary>
+            Releases the resources used by the implementation of <see cref="T:Dpr.Core.DataAccess.BaseRepository`2"/>.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.Search``1(System.String)">
+            <summary>
+            Provides predefined behavior to search for TResult items.
+            </summary>
+            <typeparam name="TResult">The type of the items.</typeparam>
+            <param name="searchString">The word matching the TResult items.</param>
+            <returns>The TResult items matching the word.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.GetAll">
+            <summary>
+            Provides predefined behavior to get all of the TModel items.
+            </summary>
+            <returns>The TModel items.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.GetAll(System.Predicate{`1})">
+            <summary>
+            Provides predefined behavior to get of the TModel items matching a <see cref="T:System.Predicate`1"/>.
+            </summary>
+            <param name="filter">The <see cref="T:System.Predicate`1"/> matching the TModel items.</param>
+            <returns>The TModel items.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.Single(System.Predicate{`1})">
+            <summary>
+            Provides predefined behavior to get an TModel item matching a <see cref="T:System.Predicate`1"/>.
+            </summary>
+            <param name="filter">The <see cref="T:System.Predicate`1"/> matching the TModel item.</param>
+            <returns>The TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.Add(`1)">
+            <summary>
+            Provides predefined behavior to add a new TModel item.
+            </summary>
+            <param name="entity">The new TModel item.</param>
+            <returns>The saved TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.Add(`1[])">
+            <summary>
+            Provides predefined behavior to add a new TModel item.
+            </summary>
+            <param name="entities">The new collection of TModel item.</param>
+            <returns>The saved TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.Update(`1)">
+            <summary>
+            Provides predefined behavior to update an existing TModel item.
+            </summary>
+            <param name="entity">The existing TModel item.</param>
+            <returns>The updated TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.Update(`1[])">
+            <summary>
+            Provides predefined behavior to update an existing collection of TModel.
+            </summary>
+            <param name="entities">The existing collection of TModel.</param>
+            <returns>The updated TModel item.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.BaseRepository`2.Delete(`1)">
+            <summary>
+            Provides predefined behavior to delete an existing TModel item.
+            </summary>
+            <param name="entity">The existing TModel item.</param>
+        </member>
+        <member name="T:Dpr.Core.DataAccess.FactoryRepository">
+            <summary>
+            Provides a single point of creation of <see cref="T:Dpr.Core.DataAccess.IRepository`1"/> implementations.
+            </summary>
+        </member>
+        <member name="F:Dpr.Core.DataAccess.FactoryRepository.Repositories">
+            <summary>
+            Caches the <see cref="T:System.Type"/> of an item already created for the model.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.FactoryRepository.#cctor">
+            <summary>
+            Initializes static resoucerces.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.FactoryRepository.CreateRepository``1">
+            <summary>
+            Creates an instance of the implementation of <see cref="T:Dpr.Core.DataAccess.IRepository`1"/> corresponding to the TModel.
+            </summary>
+            <typeparam name="TModel">The TModel model.</typeparam>
+            <returns>An instance of the implementation of <see cref="T:Dpr.Core.DataAccess.IRepository`1"/>.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.FactoryRepository.Create``1">
+            <summary>
+            Creates an instance of an existing implementation of <see cref="T:Dpr.Core.DataAccess.IRepository`1"/> corresponding to the TModel.
+            </summary>
+            <typeparam name="TModel">The TModel model.</typeparam>
+            <returns>An instance of the existing implementation of <see cref="T:Dpr.Core.DataAccess.IRepository`1"/>.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.FactoryRepository.Create``2">
+            <summary>
+            Creates an instance of <see cref="T:Dpr.Core.DataAccess.BaseRepository`2"/> corresponding to the TContext and TModel.
+            </summary>
+            <typeparam name="TContext">The TContext Db Context.</typeparam>
+            <typeparam name="TModel">The TModel model.</typeparam>
+            <returns>An instance of <see cref="T:Dpr.Core.DataAccess.BaseRepository`2"/>.</returns>
+        </member>
+        <member name="M:Dpr.Core.DataAccess.FactoryRepository.GetRepositoryTypes(System.Reflection.Assembly)">
+            <summary>
+            Returns the types implementing the <see cref="T:Dpr.Core.DataAccess.IRepository`1"/> type from the calling assebly.
+            </summary>
+            <param name="targetAssembly">The calling assmbly.</param>
+            <returns>A collection of <see cref="T:System.Type"/>.</returns>
+        </member>
+        <member name="T:Dpr.Core.Extensions.DictionaryExtension">
+            <summary>
+            Provides extension methods to add behavior to <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Extensions.DictionaryExtension.TryGetValue``1(System.Collections.Generic.IDictionary{System.String,``0},System.String)">
+            <summary>
+            Returns the value associated with the specified key.
+            </summary>
+            <typeparam name="TValue">The type of the value to return.</typeparam>
+            <param name="dictionary">The target dictionary.</param>
+            <param name="key">The key containing the value to return.</param>
+            <returns>The value associated with the key or the default value of TValue if the key was not found.</returns>
+        </member>
+        <member name="M:Dpr.Core.Extensions.DictionaryExtension.TryGetValue``1(System.Collections.Generic.IDictionary{System.String,System.Object},System.String)">
+            <summary>
+            Returns the value associated with the specified key.
+            </summary>
+            <typeparam name="TValue">The type of the value to return.</typeparam>
+            <param name="dictionary">The target dictionary.</param>
+            <param name="key">The key containing the value to return.</param>
+            <returns>The value associated with the key or the default value of TValue if the key was not found.</returns>
+        </member>
+        <member name="T:Dpr.Core.Extensions.EnumExtension">
+            <summary>
+            Provides extension methods for <see cref="T:System.Enum"/>.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Extensions.EnumExtension.GetDescription``1(``0)">
+            <summary>
+            Gets the Description assigned to a <see cref="T:System.Enum"/> using the <see cref="T:System.ComponentModel.DescriptionAttribute"/> attribute.
+            </summary>
+            <typeparam name="TEnum">The type of the <see cref="T:System.Enum"/>.</typeparam>
+            <param name="enumValue">The value of the <see cref="T:System.Enum"/> marked with <see cref="T:System.ComponentModel.DescriptionAttribute"/>.</param>
+            <returns>Returns a <see cref="T:System.String"/> value containing the Description.</returns>
+        </member>
+        <member name="M:Dpr.Core.Extensions.EnumExtension.GetCustomAttributes``1(System.Reflection.FieldInfo)">
+            <summary>
+            Gets the collection of the TAttr attributes assigned to a <see cref="T:System.Reflection.FieldInfo"/>.
+            </summary>
+            <typeparam name="TAttr">The type of the <see cref="T:System.Attribute"/>.</typeparam>
+            <param name="field">The <see cref="T:System.Reflection.FieldInfo"/> item.</param>
+            <returns>Returns the collection of TAttr assigned to the <see cref="T:System.Reflection.FieldInfo"/>.</returns>
+        </member>
+        <member name="M:Dpr.Core.Extensions.EnumExtension.GetElements``1(``0)">
+            <summary>
+            Returns the elements of the specified TEnum.
+            </summary>
+            <typeparam name="TEnum">The TEnum to get the elements from.</typeparam>
+            <param name="enumValue">The enum value.</param>
+            <returns>A collection of TEnum elements.</returns>
+        </member>
+        <member name="M:Dpr.Core.Extensions.EnumExtension.ToDictionaryByDescription``1(``0)">
+            <summary>
+            Returns an implementation of <see cref="T:System.Collections.Generic.IDictionary`2"/> representing all of the elements arranged by their description as key and its TEnum as value.
+            </summary>
+            <typeparam name="TEnum">The TEnum to get the elements from.</typeparam>
+            <param name="enumValue">The enum value.</param>
+            <returns>An implementation of <see cref="T:System.Collections.Generic.IDictionary`2"/>.</returns>
+        </member>
+        <member name="M:Dpr.Core.Extensions.EnumExtension.ToDictionaryByValue``1(``0)">
+            <summary>
+            Returns an implementation of <see cref="T:System.Collections.Generic.IDictionary`2"/> representing all of the elements arranged by the TEnum as key and its description as value.
+            </summary>
+            <typeparam name="TEnum">The TEnum to get the elements from.</typeparam>
+            <param name="enumValue">The enum value.</param>
+            <returns>An implementation of <see cref="T:System.Collections.Generic.IDictionary`2"/>.</returns>
+        </member>
+        <member name="T:Dpr.Core.Extensions.EnumerableExtension">
+            <summary>
+            Provides extension methos for IEnumerable.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Extensions.EnumerableExtension.IsNullOrEmpty``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns true if the source is null or has no elements.
+            </summary>
+            <typeparam name="TSource">The type of the elements of source.</typeparam>
+            <param name="source">The <see cref="T:System.Collections.Generic.IEnumerable`1"/> to check for emptiness.</param>
+            <returns>true if the source is null or has no elements; otherwise, false.</returns>
+        </member>
+        <member name="T:Dpr.Core.Extensions.JsonExtension">
+            <summary>
+            Provides extension methods for object serialization and string deserialization.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Extensions.JsonExtension.Deserialize``1(System.Net.Http.HttpContent)">
+            <summary>
+            Deserializes a <see cref="T:System.Net.Http.HttpContent"/> as JSON into an instance of T.
+            </summary>
+            <typeparam name="T">the type of the instance to deserialize.</typeparam>
+            <param name="content">The <see cref="T:System.Net.Http.HttpContent"/>.</param>
+            <returns>A new instance of the deserialized T.</returns>
+        </member>
+        <member name="M:Dpr.Core.Extensions.JsonExtension.DeserializeJson``1(System.String)">
+            <summary>
+            Deserializes a <see cref="T:System.String"/> as JSON into an instance of T.
+            </summary>
+            <typeparam name="T">the type of the instance to deserialize.</typeparam>
+            <param name="json">The <see cref="T:System.String"/>.</param>
+            <returns>A new instance of the deserialized T.</returns>
+        </member>
+        <member name="M:Dpr.Core.Extensions.JsonExtension.ToJson(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Serializes an instance of <see cref="T:System.Collections.Generic.IDictionary`2"/> into a JSON.
+            </summary>
+            <param name="data">The data to serialize.</param>
+            <returns>A string representing the JSON.</returns>        
+        </member>
+        <member name="M:Dpr.Core.Extensions.JsonExtension.ToDictionary(System.String)">
+            <summary>
+            Deserializes a JSON into an implementation of <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            </summary>
+            <param name="json">The JSON to deserialize.</param>
+            <returns>An instance of <see cref="T:System.Collections.Generic.IDictionary`2"/> representing the JSON.</returns>
+        </member>
+        <member name="T:Dpr.Core.Logging.ILogger">
+            <summary>
+            Provides abstraction to log information and errors into a target datasource.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Logging.ILogger.Info(System.String[])">
+            <summary>
+            Logs an information event.
+            </summary>
+            <param name="infoMessages">The information messages to log.</param>
+        </member>
+        <member name="M:Dpr.Core.Logging.ILogger.Error(System.Exception,System.String[])">
+            <summary>
+            Logs an error event.
+            </summary>
+            <param name="exception">The exception to log.</param>
+            <param name="errorMessages">The event messages to log.</param>
+        </member>
+        <member name="T:Dpr.Core.Logging.Logger">
+            <summary>
+            Provides behavior by implementing the <see cref="T:Dpr.Core.Logging.ILogger"/> abstraction to log information and errors into a *.log file.
+            </summary>
+        </member>
+        <member name="F:Dpr.Core.Logging.Logger.LogTypeDescriptions">
+            <summary>
+            Stores the descriptions corresponding to each <see cref="T:Dpr.Core.Logging.LogType"/>  item.
+            </summary>
+        </member>
+        <member name="F:Dpr.Core.Logging.Logger._filePath">
+            <summary>
+            Stores the file path.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Logging.Logger.#cctor">
+            <summary>
+            Initializes static resources.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Logging.Logger.#ctor">
+            <summary>
+            Creates a new instance of <see cref="T:Dpr.Core.Logging.Logger"/> by using default configurations.
+            </summary>
+            <remarks>The FilePath will be generated as follows: [The name of the Calling Assembly].log</remarks>
+        </member>
+        <member name="M:Dpr.Core.Logging.Logger.#ctor(System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:Dpr.Core.Logging.Logger"/> based on the specified filePath.
+            </summary>
+            <param name="filePath">The file path to log the events.</param>
+        </member>
+        <member name="M:Dpr.Core.Logging.Logger.LogMessage(Dpr.Core.Logging.LogType,System.String[])">
+            <summary>
+            Logs messages corresponding to a <see cref="T:Dpr.Core.Logging.LogType"/>.
+            </summary>
+            <param name="logType">The type of log.</param>
+            <param name="messages">The messages to log.</param>
+        </member>
+        <member name="M:Dpr.Core.Logging.Logger.Info(System.String[])">
+            <summary>
+            Logs an information event.
+            </summary>
+            <param name="infoMessages">The information messages to log.</param>
+        </member>
+        <member name="M:Dpr.Core.Logging.Logger.Error(System.Exception,System.String[])">
+            <summary>
+            Logs an error event.
+            </summary>
+            <param name="exception">The exception to log.</param>
+            <param name="errorMessages">The event messages to log.</param>
+        </member>
+        <member name="T:Dpr.Core.Logging.LogType">
+            <summary>
+            Represents the type of logs.
+            </summary>
+        </member>
+        <member name="F:Dpr.Core.Logging.LogType.Info">
+            <summary>
+            Represents the Information log type.
+            </summary>
+        </member>
+        <member name="F:Dpr.Core.Logging.LogType.Error">
+            <summary>
+            Represents the Error type.
+            </summary>
+        </member>
+        <member name="T:Dpr.Core.Utilities.EmailSender">
+            <summary>
+            Provides implementation of <see cref="T:Dpr.Core.Utilities.IEmailSender"/>.
+            </summary>
+        </member>
+        <member name="T:Dpr.Core.Utilities.IEmailSender">
+            <summary>
+            Provides abstraction to send emails.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Utilities.IEmailSender.Send(System.String,System.Collections.Generic.ICollection{System.String},System.String,System.String)">
+            <summary>
+            Sens an email to a SMTP server.
+            </summary>
+            <param name="from">The address of the sender.</param>
+            <param name="recipients">The address of the recipients.</param>
+            <param name="subject">The subject text.</param>
+            <param name="htmlBody">The message body</param>
+        </member>
+        <member name="M:Dpr.Core.Utilities.IEmailSender.SendAsync(System.String,System.Collections.Generic.ICollection{System.String},System.String,System.String)">
+            <summary>
+            Sens an email to a SMTP server.
+            </summary>
+            <param name="from">The address of the sender.</param>
+            <param name="recipients">The address of the recipients.</param>
+            <param name="subject">The subject text.</param>
+            <param name="htmlBody">The message body</param>
+            <returns>A task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="F:Dpr.Core.Utilities.EmailSender._smtpServer">
+            <summary>
+            Stores the SMTP server.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Utilities.EmailSender.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of <see cref="T:Dpr.Core.Utilities.EmailSender"/> by using the specified SMTP server.
+            </summary>
+            <param name="smtpServer">The name of the host computer used for SMTP transactions.</param>
+        </member>
+        <member name="M:Dpr.Core.Utilities.EmailSender.ValidateParameters(System.String,System.Collections.Generic.IEnumerable{System.String},System.String,System.String)">
+            <summary>
+            Performs validations against parameters.
+            </summary>
+            <param name="from">The address of the sender.</param>
+            <param name="recipients">The address of the recipients.</param>
+            <param name="subject">The subject text.</param>
+            <param name="htmlBody">The message body</param>
+        </member>
+        <member name="M:Dpr.Core.Utilities.EmailSender.Send(System.String,System.Collections.Generic.ICollection{System.String},System.String,System.String)">
+            <summary>
+            Sens an email to a SMTP server.
+            </summary>
+            <param name="from">The address of the sender.</param>
+            <param name="recipients">The address of the recipients.</param>
+            <param name="subject">The subject text.</param>
+            <param name="htmlBody">The message body</param>
+        </member>
+        <member name="M:Dpr.Core.Utilities.EmailSender.SendAsync(System.String,System.Collections.Generic.ICollection{System.String},System.String,System.String)">
+            <summary>
+            Sens an email to a SMTP server.
+            </summary>
+            <param name="from">The address of the sender.</param>
+            <param name="recipients">The address of the recipients.</param>
+            <param name="subject">The subject text.</param>
+            <param name="htmlBody">The message body</param>
+            <returns>A task object representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Dpr.Core.Extensions.XmlExtension">
+            <summary>
+            Provides behavior to transform a class into HTML using a XSLT file.
+            </summary>
+        </member>
+        <member name="M:Dpr.Core.Extensions.XmlExtension.ToHtml``1(``0,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Returns a <see cref="T:System.String"/> containing the corresponding HTML to the transformation of the TModel.
+            </summary>
+            <typeparam name="TModel">the type of the model.</typeparam>
+            <param name="model">The model to transform.</param>
+            <param name="xsltFilePath">The file path of the XSLT file.</param>
+            <param name="customParameters">Custom parameters to be added to the transformation.</param>
+            <returns>A <see cref="T:System.String"/> containing the corresponding HTML to the transformation of the TModel.</returns>
+        </member>
+        <member name="M:Dpr.Core.Extensions.XmlExtension.SerializeXml``1(``0)">
+            <summary>
+            Returns an xml <see cref="T:System.String"/> containing the serialized TModel.
+            </summary>
+            <typeparam name="TModel">The type of the model.</typeparam>
+            <param name="model">the model to serialize.</param>
+            <returns>An xml <see cref="T:System.String"/> containing the serialized TModel.</returns>
+        </member>
+        <member name="M:Dpr.Core.Extensions.XmlExtension.DeserializeXml``1(System.String)">
+            <summary>
+            Deserializes the specified xml into the specified TModel.
+            </summary>
+            <typeparam name="TModel">The type of the TModel.</typeparam>
+            <param name="xml">The xml represented either by a <see cref="T:System.String"/> or a file path.</param>
+            <returns>An instance of TModel.</returns>
+        </member>
+    </members>
+</doc>
