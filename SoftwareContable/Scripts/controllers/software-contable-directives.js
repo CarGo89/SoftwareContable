@@ -123,6 +123,26 @@
             };
         },
 
+        decimal: function () {
+            return {
+                restrict: "A",
+
+                link: function (scope, element, attrs) {
+                    element = $(element);
+
+                    if (element.is("input") !== true) {
+                        return;
+                    }
+
+                    element.keypress(function () {
+                        var inputValue = element.val();
+
+                        return (event.which >= 48 && event.which <= 57) || (inputValue.indexOf(".") < 0 && event.which === 46);
+                    });
+                }
+            };
+        },
+
         modalWindow: function () {
             return {
                 restrict: "A",

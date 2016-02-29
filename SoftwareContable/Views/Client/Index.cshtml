@@ -27,7 +27,7 @@
     <form class="form-horizontal" ng-init="initUrls('@Url.Action("Get", "Client")', '@Url.Action("Save", "Client")', '@Url.Action("Update", "Client")', '@Url.Action("Validate", "Client")')">
         <div class="container table-results-container">
             <div class="row text-center">
-                <div class="col-md-offset-3 col-md-3 text-justify alert alert-danger alert-validation-messages hidden" role="alert" ng-class="{'hidden': !showUpdateErrors}" ng-click="clearMessages()">
+                <div class="col-md-offset-3 col-md-4 text-justify alert alert-danger alert-validation-messages hidden" role="alert" ng-class="{'hidden': !showUpdateErrors}" ng-click="clearMessages()">
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-offset-3 col-md-3 text-justify alert alert-success alert-validation-messages hidden" role="alert" ng-class="{'hidden': !showSuccessMessages}" ng-click="clearMessages()">
+                <div class="col-md-offset-3 col-md-4 text-justify alert alert-success alert-validation-messages hidden" role="alert" ng-class="{'hidden': !showSuccessMessages}" ng-click="clearMessages()">
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>

@@ -5,6 +5,7 @@
 
     softwareContable.directive("datePicker", angularDirectives.datePicker);
     softwareContable.directive("integer", angularDirectives.integer);
+    softwareContable.directive("decimal", angularDirectives.decimal);
     softwareContable.directive("modalWindow", angularDirectives.modalWindow);
 
     softwareContable.controller("createReportController", ["$scope", "$compile", function ($scope, $compile) {

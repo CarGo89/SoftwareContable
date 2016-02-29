@@ -30,7 +30,7 @@
     <form class="form-inline" ng-init="initUrls('@Url.Action("Catalogs", "Report")', '@Url.Action("Save", "Report")', '@Url.Action("Validate", "Report")')">
         <div class="container table-results-container">
             <div class="row text-center">
-                <div class="col-md-offset-3 col-md-3 text-justify alert alert-danger alert-validation-messages hidden" ng-class="{'hidden': !showErrors}" ng-click="clearMessages()">
+                <div class="col-md-offset-3 col-md-4 text-justify alert alert-danger alert-validation-messages hidden" ng-class="{'hidden': !showErrors}" ng-click="clearMessages()">
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-offset-3 col-md-3 text-justify alert alert-success alert-validation-messages hidden" ng-class="{'hidden': !showMessages}" ng-click="clearMessages()">
+                <div class="col-md-offset-3 col-md-4 text-justify alert alert-success alert-validation-messages hidden" ng-class="{'hidden': !showMessages}" ng-click="clearMessages()">
                     <button type="button" class="close" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -103,7 +103,7 @@
                 <div class="col-md-offset-3 col-md-4">
                     <div class="form-group">
                         <h5>Importe Factura</h5>
-                        <input type="text" class="form-control" placeholder="Importe Factura" ng-model="newReport.InvoiceTotal" />
+                        <input type="text" class="form-control" placeholder="Importe Factura" ng-model="newReport.InvoiceTotal" decimal />
                     </div>
                 </div>
                 <div class="col-md-4">
