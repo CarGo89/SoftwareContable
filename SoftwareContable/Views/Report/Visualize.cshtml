@@ -3,13 +3,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@* loadingPanel set to active just when page is loaded *@
-<style>
-    #loadingPanel {
-        display: table;
-    }
-</style>
-
 @section Styles
 {
     @Styles.Render(
@@ -92,7 +85,6 @@
         "~/Scripts/datatable/js/jquery.dataTables.js",
         "~/Scripts/datatable/responsive/js/dataTables.responsive.min.js",
         "~/Scripts/datatable/js/dataTables.bootstrap.js",
-        "~/Scripts/Utilities/software-contable.js",
         "~/Scripts/controllers/software-contable-directives.js",
         "~/Scripts/controllers/view-report-controller.js")
 }

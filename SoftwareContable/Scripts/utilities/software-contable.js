@@ -6,6 +6,10 @@
     var init = function () {
         window.ajaxLoadingPanel = $("#loadingPanel");
 
+        if ($("form").attr("hide-loading-panel") === "true") {
+            window.ajaxLoadingPanel.removeClass("active");
+        }
+
         window.errorPanel = $("#errorPanel");
 
         window.warningPanel = $("#warningPanel");
@@ -185,7 +189,7 @@
         deleteIconCssClass: "fa fa-trash-o text-danger delete-icon"
     };
 
-    $(document).ready(function () {
+    $(document).off("ajaxSend ajaxComplete").ready(function () {
         init();
     }).ajaxSend(function (event, request, settings) {
         if (window.ajaxLoadingPanel) {

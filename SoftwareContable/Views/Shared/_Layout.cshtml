@@ -21,13 +21,6 @@
         "~/Content/software-contable.css")
 
     @RenderSection("Styles", false)
-
-    @* loadingPanel set to active just when page is loaded *@
-    <style>
-        #loadingPanel {
-            display: table;
-        }
-    </style>
 </head>
 <body ng-app="softwareContable" date-format="dd/mm/yyyy">
 
@@ -87,7 +80,7 @@
             </div>
         </div>
 
-        <div id="loadingPanel">
+        <div id="loadingPanel" class="active">
             <div>
                 Cargando...<br />
                 <i class="fa fa-5x fa-circle-o-notch fa-spin"></i>

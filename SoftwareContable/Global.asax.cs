@@ -30,7 +30,7 @@ namespace SoftwareContable
                 {
                     dbContext.Roles.AddRange(new[]
                     {
-                        new Role { Name = "Administrator" },
+                        new Role { Name = "Administrador" },
                         new Role { Name = "Usuario" }
                     });
 
