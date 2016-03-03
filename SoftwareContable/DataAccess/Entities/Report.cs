@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoftwareContable.DataAccess.Entities
 {
+    [Table("Reports", Schema = "sc")]
     public class Report : IEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,7 +15,6 @@ namespace SoftwareContable.DataAccess.Entities
 
         public virtual Client Client { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreationDate { get; set; }
 
         [Required]

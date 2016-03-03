@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoftwareContable.DataAccess.Entities
 {
+    [Table("Clients", Schema = "sc")]
     public class Client : IEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

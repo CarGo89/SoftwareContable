@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SoftwareContable.DataAccess.Entities
 {
+    [Table("Roles", Schema = "sc")]
     public class Role : IEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]

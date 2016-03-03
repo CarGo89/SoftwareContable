@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -24,7 +25,7 @@ namespace SoftwareContable.Controllers
 
         protected readonly IRepository<TData> ModelRepository;
 
-        protected readonly ILogger _logger;
+        protected readonly ILogger Logger;
 
         protected readonly string ModelDescription;
 
@@ -62,7 +63,7 @@ namespace SoftwareContable.Controllers
 
             ModelRepository = FactoryRepository.Create<SoftwareContableDbContext, TData>();
 
-            _logger = new Logger();
+            Logger = new Logger(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SoftwareContable.log"));
 
             if (!ModelDescriptionsByType.TryGetValue(tModel, out ModelDescription))
             {
@@ -152,7 +153,7 @@ namespace SoftwareContable.Controllers
 
         protected override void OnException(ExceptionContext filterContext)
         {
-            _logger.Error(filterContext.Exception);
+            Logger.Error(filterContext.Exception);
 
             base.OnException(filterContext);
         }

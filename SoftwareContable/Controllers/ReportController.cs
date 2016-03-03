@@ -67,6 +67,8 @@ namespace SoftwareContable.Controllers
                 return GetValidationMessages().ToJsonResult();
             }
 
+            report.CreationDate = DateTime.Now;
+
             var dbReport = Mapper.Map<DataAccess.Entities.Report>(report);
             var savedReport = await ModelRepository.AddAsync(dbReport);
 
